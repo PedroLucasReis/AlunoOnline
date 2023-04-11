@@ -54,8 +54,13 @@ class _MenuPageState extends State<MenuPage> {
             child: Container(
               padding: const EdgeInsets.all(5),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.blue[900]),
+                border: Border.all(color: Colors.blue),
+                boxShadow: const [
+                  BoxShadow(color: Colors.blue, offset: Offset(5, 5))
+                ],
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.white,
+              ),
               child: ExpansionPanelList(
                 elevation: 0,
                 expansionCallback: (int index, bool isExpanded) {
@@ -65,45 +70,176 @@ class _MenuPageState extends State<MenuPage> {
                 },
                 children: [
                   ExpansionPanel(
-                      backgroundColor: Colors.blue[900],
+                      backgroundColor: Colors.white,
                       isExpanded: perfil,
                       canTapOnHeader: true,
                       headerBuilder: (BuildContext context, bool isExpanded) {
-                        return const Center(
+                        return Center(
                           child: Text(
                             'Olá, seja bem-vindo(a)!',
                             style: TextStyle(
                                 fontFamily: 'upheavtt',
-                                color: Colors.white,
+                                color: Colors.blue[900],
                                 fontSize: 16),
                           ),
                         );
                       },
-                      body: Column(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Row(
-                              children: [
-                                const CircleAvatar(
-                                    radius: 50,
-                                    backgroundImage:
-                                        AssetImage('images/hiro.jpg')),
-                                        Column(children: [ ],)
-                              ],
-                            ),
+                      body: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.blue),
+                            boxShadow: const [
+                              BoxShadow(
+                                  color: Colors.blue, offset: Offset(5, 5))
+                            ],
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white,
                           ),
-                          Container(
-                            height: 50,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Row(),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 15, top: 10),
+                                child: Text(
+                                  'Desenvolvedores:',
+                                  style: TextStyle(
+                                      fontFamily: 'upheavtt',
+                                      color: Colors.blue[900],
+                                      fontSize: 16),
+                                ),
+                              ),
+                              const Divider(
+                                thickness: 2,
+                                color: Colors.blue,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: const Row(
+                                    children: [
+                                      CircleAvatar(
+                                          radius: 50,
+                                          backgroundImage:
+                                              AssetImage('images/pedro.jpeg')),
+                                      Column(
+                                        children: [],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: const Row(
+                                    children: [
+                                      CircleAvatar(
+                                          radius: 50,
+                                          backgroundImage: AssetImage(
+                                              'images/henrique.jpeg')),
+                                      Column(
+                                        children: [],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
+                        ),
                       ))
+                ],
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Container(
+              padding: const EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.blue),
+                boxShadow: const [
+                  BoxShadow(color: Colors.blue, offset: Offset(5, 5))
+                ],
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.white,
+              ),
+              child: Column(
+                children: [
+                  Text(
+                    'Curso:',
+                    style: TextStyle(
+                      fontFamily: 'upheavtt',
+                      color: Colors.blue[900],
+                      fontSize: 16,
+                    ),
+                  ),
+                  Text(
+                    'Engenharia da Computação',
+                    style: TextStyle(
+                      fontFamily: 'upheavtt',
+                      color: Colors.blue[900],
+                      fontSize: 16,
+                    ),
+                  ),
+                  Text(
+                    'Email:',
+                    style: TextStyle(
+                      fontFamily: 'upheavtt',
+                      color: Colors.blue[900],
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Container(
+              padding: const EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.blue),
+                boxShadow: const [
+                  BoxShadow(color: Colors.blue, offset: Offset(5, 5))
+                ],
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.white,
+              ),
+              child: Column(
+                children: [
+                  Text(
+                    'Curso:',
+                    style: TextStyle(
+                      fontFamily: 'upheavtt',
+                      color: Colors.blue[900],
+                      fontSize: 16,
+                    ),
+                  ),
+                  Text(
+                    'Engenharia da Computação',
+                    style: TextStyle(
+                      fontFamily: 'upheavtt',
+                      color: Colors.blue[900],
+                      fontSize: 16,
+                    ),
+                  ),
+                  Text(
+                    'Email:',
+                    style: TextStyle(
+                      fontFamily: 'upheavtt',
+                      color: Colors.blue[900],
+                      fontSize: 16,
+                    ),
+                  ),
                 ],
               ),
             ),
