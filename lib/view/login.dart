@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+// ignore: depend_on_referenced_packages
 import 'package:animate_gradient/animate_gradient.dart';
 import 'package:myproject/view/menupage.dart';
 import 'package:myproject/view/signup.dart';
-import 'package:myproject/view/start.dart';
 
 class Login extends StatefulWidget {
+  const Login({super.key});
+
   @override
-  _LoginState createState() => _LoginState();
+  State<Login> createState() => _LoginState();
 }
 
 class _LoginState extends State<Login> {
@@ -164,7 +166,8 @@ class _LoginState extends State<Login> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => SignUp()));
+                                          builder: (context) =>
+                                              const SignUp()));
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
@@ -264,7 +267,7 @@ class _LoginState extends State<Login> {
                                                             backgroundColor:
                                                                 Colors
                                                                     .blue[900],
-                                                            content: Text(
+                                                            content: const Text(
                                                               'Email enviado!',
                                                               style: TextStyle(
                                                                   letterSpacing:

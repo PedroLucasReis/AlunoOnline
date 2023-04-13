@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// ignore: depend_on_referenced_packages
 import 'package:animate_gradient/animate_gradient.dart';
 
 class SignUp extends StatefulWidget {
@@ -97,7 +98,7 @@ class _SignUpState extends State<SignUp> {
                               keyboardType: TextInputType.number,
                               decoration: InputDecoration(
                                   fillColor: Colors.blue,
-                                  enabledBorder: OutlineInputBorder(
+                                  enabledBorder: const OutlineInputBorder(
                                       borderSide:
                                           BorderSide(color: Colors.blue)),
                                   suffixIcon: const Icon(Icons.person),
@@ -122,7 +123,7 @@ class _SignUpState extends State<SignUp> {
                               keyboardType: TextInputType.number,
                               decoration: InputDecoration(
                                   fillColor: Colors.blue,
-                                  enabledBorder: OutlineInputBorder(
+                                  enabledBorder: const OutlineInputBorder(
                                       borderSide:
                                           BorderSide(color: Colors.blue)),
                                   suffixIcon: const Icon(Icons.dialpad_rounded),
@@ -147,7 +148,7 @@ class _SignUpState extends State<SignUp> {
                               keyboardType: TextInputType.number,
                               decoration: InputDecoration(
                                   fillColor: Colors.blue,
-                                  enabledBorder: OutlineInputBorder(
+                                  enabledBorder: const OutlineInputBorder(
                                       borderSide:
                                           BorderSide(color: Colors.blue)),
                                   suffixIcon: const Icon(Icons.email_rounded),

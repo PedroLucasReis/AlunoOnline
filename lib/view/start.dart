@@ -38,9 +38,9 @@ class _StartPageState extends State<StartPage> {
                   decoration: BoxDecoration(
                     color: Colors.blue[900],
                   ),
-                  child: Row(
+                  child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
+                      children: [
                         Hero(
                           tag: 'logo2',
                           child: Text(
@@ -73,7 +73,7 @@ class _StartPageState extends State<StartPage> {
   void tela2() {
     Future.delayed(const Duration(seconds: 2), () {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => Login()));
+          context, MaterialPageRoute(builder: (context) => const Login()));
     });
   }
 }
