@@ -226,14 +226,71 @@ class _MenuPageState extends State<MenuPage> {
                                                       offset: Offset(5, 5),
                                                     )
                                                   ]),
-                                              child: const Row(
+                                              child: Row(
                                                 children: [
-                                                  CircleAvatar(
+                                                  const CircleAvatar(
                                                       radius: 50,
                                                       backgroundImage: AssetImage(
                                                           'images/henrique.jpeg')),
-                                                  Column(
-                                                    children: [],
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(5),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        RichText(
+                                                          text: TextSpan(
+                                                              style: const TextStyle(
+                                                                  fontFamily:
+                                                                      'upheavtt',
+                                                                  fontSize: 16),
+                                                              children: [
+                                                                TextSpan(
+                                                                    text:
+                                                                        'Nome: ',
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .yellow[700])),
+                                                                TextSpan(
+                                                                    text:
+                                                                        'Henrique Neves\nIgnácio',
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .blue[900]))
+                                                              ]),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  top: 10),
+                                                          child: RichText(
+                                                            text: TextSpan(
+                                                                style: const TextStyle(
+                                                                    fontFamily:
+                                                                        'upheavtt',
+                                                                    fontSize:
+                                                                        16),
+                                                                children: [
+                                                                  TextSpan(
+                                                                      text:
+                                                                          'Código: ',
+                                                                      style: TextStyle(
+                                                                          color:
+                                                                              Colors.yellow[700])),
+                                                                  TextSpan(
+                                                                      text:
+                                                                          '834487',
+                                                                      style: TextStyle(
+                                                                          color:
+                                                                              Colors.blue[900]))
+                                                                ]),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
                                                   )
                                                 ],
                                               ),
