@@ -28,57 +28,38 @@ class _VerticalBarScreenViewState extends State<VerticalBarScreenView> {
               ),
             ),
           ),
-          Tooltip(
-              message: 'Início',
-              verticalOffset: -10,
-              margin: const EdgeInsets.only(right: 50),
-              child:
-                  IconButton(onPressed: () {}, icon: const Icon(Icons.home))),
-          Tooltip(
-              message: 'Perfil',
-              verticalOffset: -10,
-              margin: const EdgeInsets.only(right: 50),
-              child: IconButton(
-                  onPressed: () {}, icon: const Icon(Icons.person_rounded))),
-          Tooltip(
-              message: 'Consultas',
-              verticalOffset: -10,
-              margin: const EdgeInsets.only(right: 50),
-              child: IconButton(
-                  onPressed: () {}, icon: const Icon(Icons.search_rounded))),
-          Tooltip(
-            message: 'Ferramentas',
-            verticalOffset: -10,
-            margin: const EdgeInsets.only(right: 50),
-            child: IconButton(
-                onPressed: () {}, icon: const Icon(Icons.engineering_rounded)),
-          ),
-          Tooltip(
-            message: 'Requerimentos',
-            verticalOffset: -10,
-            margin: const EdgeInsets.only(right: 50),
-            child: IconButton(
-                onPressed: () {}, icon: Icon(Icons.assistant_rounded)),
-          ),
-          Tooltip(
-            message: 'Financeiro',
-            verticalOffset: -10,
-            margin: const EdgeInsets.only(right: 50),
-            child: IconButton(
-                onPressed: () {}, icon: const Icon(Icons.attach_money_rounded)),
-          ),
-          Tooltip(
-              message: 'Matrícula',
-              verticalOffset: -10,
-              margin: const EdgeInsets.only(right: 50),
-              child: IconButton(
-                  onPressed: () {}, icon: const Icon(Icons.school_rounded))),
-          Tooltip(
-              message: 'Informações',
-              verticalOffset: -10,
-              margin: const EdgeInsets.only(right: 50),
-              child: IconButton(
-                  onPressed: () {}, icon: const Icon(Icons.info_rounded)))
+          IconButton(
+              tooltip: 'Início',
+              onPressed: () {},
+              icon: const Icon(Icons.home)),
+          IconButton(
+              tooltip: 'Perfil',
+              onPressed: () {},
+              icon: const Icon(Icons.person_rounded)),
+          IconButton(
+              tooltip: 'Consultas',
+              onPressed: () {},
+              icon: const Icon(Icons.search_rounded)),
+          IconButton(
+              tooltip: 'Ferramentas',
+              onPressed: () {},
+              icon: const Icon(Icons.engineering_rounded)),
+          IconButton(
+              tooltip: 'Requerimentos',
+              onPressed: () {},
+              icon: const Icon(Icons.assistant_rounded)),
+          IconButton(
+              tooltip: 'Financeiro',
+              onPressed: () {},
+              icon: const Icon(Icons.attach_money_rounded)),
+          IconButton(
+              tooltip: 'Matrícula',
+              onPressed: () {},
+              icon: const Icon(Icons.school_rounded)),
+          IconButton(
+              tooltip: 'Informações',
+              onPressed: () {},
+              icon: const Icon(Icons.info_rounded))
         ],
       ),
     );

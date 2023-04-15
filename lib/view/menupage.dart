@@ -27,6 +27,9 @@ class _MenuPageState extends State<MenuPage> {
             children: [
               Column(
                 children: [
+                  PageView(
+                    scrollDirection: Axis.vertical,
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(10),
                     child: Container(
