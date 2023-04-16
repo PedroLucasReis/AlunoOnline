@@ -40,13 +40,16 @@ class _MenuPageState extends State<MenuPage> {
           body: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width - 50,
-                child: PageView(
-                  scrollDirection: Axis.vertical,
-                  controller: _pageController,
-                  children: const [AbaHome(), AbaInfo()],
+              Padding(
+                padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height - 10,
+                  width: MediaQuery.of(context).size.width - 70,
+                  child: PageView(
+                    scrollDirection: Axis.vertical,
+                    controller: _pageController,
+                    children: const [AbaHome(), AbaInfo()],
+                  ),
                 ),
               ),
               VerticalBarScreenView(
