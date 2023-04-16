@@ -1,7 +1,23 @@
 import 'package:flutter/material.dart';
 
 class VerticalBarScreenView extends StatefulWidget {
-  const VerticalBarScreenView({super.key});
+  final VoidCallback page0;
+  final VoidCallback page1;
+  final VoidCallback page2;
+  final VoidCallback page3;
+  final VoidCallback page4;
+  final VoidCallback page5;
+  final VoidCallback page6;
+
+  const VerticalBarScreenView(
+      {super.key,
+      required this.page0,
+      required this.page1,
+      required this.page2,
+      required this.page3,
+      required this.page4,
+      required this.page5,
+      required this.page6});
 
   @override
   State<VerticalBarScreenView> createState() => _VerticalBarScreenViewState();
@@ -30,11 +46,15 @@ class _VerticalBarScreenViewState extends State<VerticalBarScreenView> {
           ),
           IconButton(
               tooltip: 'Início',
-              onPressed: () {},
+              onPressed: () {
+                widget.page0();
+              },
               icon: const Icon(Icons.home)),
           IconButton(
               tooltip: 'Perfil',
-              onPressed: () {},
+              onPressed: () {
+                widget.page1();
+              },
               icon: const Icon(Icons.person_rounded)),
           IconButton(
               tooltip: 'Consultas',
