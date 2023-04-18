@@ -139,6 +139,465 @@ class _AbaHomeState extends State<AbaHome> {
                     )
                   ],
                 )),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: Container(
+                width: MediaQuery.of(context).size.width - 80,
+                height: 205,
+                padding: const EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.blue),
+                  boxShadow: const [
+                    BoxShadow(color: Colors.blue, offset: Offset(5, 5))
+                  ],
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width - 125,
+                      height: 30,
+                      padding: const EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.blue),
+                        boxShadow: const [
+                          BoxShadow(color: Colors.blue, offset: Offset(5, 5))
+                        ],
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                      ),
+                      child: RichText(
+                        text: TextSpan(
+                            style: const TextStyle(
+                                fontFamily: 'upheavtt', fontSize: 16),
+                            children: [
+                              TextSpan(
+                                  text: 'Curso: ',
+                                  style: TextStyle(
+                                    color: Colors.blue[900],
+                                  )),
+                              TextSpan(
+                                  text: 'Engenharia da computação',
+                                  style: TextStyle(color: Colors.yellow[700])),
+                            ]),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 15),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width - 125,
+                        height: 30,
+                        padding: const EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.blue),
+                          boxShadow: const [
+                            BoxShadow(color: Colors.blue, offset: Offset(5, 5))
+                          ],
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white,
+                        ),
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: RichText(
+                            text: TextSpan(
+                                style: const TextStyle(
+                                  fontFamily: 'upheavtt',
+                                  fontSize: 16,
+                                ),
+                                children: [
+                                  TextSpan(
+                                      text: 'Google Classroom: ',
+                                      style: TextStyle(
+                                        color: Colors.blue[900],
+                                      )),
+                                  TextSpan(
+                                      text: 'anonimo@sou.unaerp.edu.br',
+                                      style: TextStyle(
+                                        color: Colors.yellow[700],
+                                      )),
+                                ]),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 15),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width - 350,
+                            height: 30,
+                            padding: const EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.blue),
+                              boxShadow: const [
+                                BoxShadow(
+                                    color: Colors.blue, offset: Offset(5, 5))
+                              ],
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.white,
+                            ),
+                            child: RichText(
+                              text: TextSpan(
+                                  style: const TextStyle(
+                                    fontFamily: 'upheavtt',
+                                    fontSize: 16,
+                                  ),
+                                  children: [
+                                    TextSpan(
+                                        text: 'Ano/Sem: ',
+                                        style: TextStyle(
+                                          color: Colors.blue[900],
+                                        )),
+                                    TextSpan(
+                                        text: '2023/1',
+                                        style: TextStyle(
+                                          color: Colors.yellow[700],
+                                        )),
+                                  ]),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 5),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width - 405,
+                              height: 30,
+                              padding: const EdgeInsets.all(5),
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.blue),
+                                boxShadow: const [
+                                  BoxShadow(
+                                      color: Colors.blue, offset: Offset(5, 5))
+                                ],
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.white,
+                              ),
+                              child: Center(
+                                child: RichText(
+                                  text: TextSpan(
+                                      style: const TextStyle(
+                                        fontFamily: 'upheavtt',
+                                        fontSize: 16,
+                                      ),
+                                      children: [
+                                        TextSpan(
+                                            text: 'Etapa: ',
+                                            style: TextStyle(
+                                              color: Colors.blue[900],
+                                            )),
+                                        TextSpan(
+                                            text: '7',
+                                            style: TextStyle(
+                                              color: Colors.yellow[700],
+                                            )),
+                                      ]),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 5),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width - 380,
+                              height: 30,
+                              padding: const EdgeInsets.all(5),
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.blue),
+                                boxShadow: const [
+                                  BoxShadow(
+                                      color: Colors.blue, offset: Offset(5, 5))
+                                ],
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.white,
+                              ),
+                              child: Center(
+                                child: RichText(
+                                  text: TextSpan(
+                                      style: const TextStyle(
+                                        fontFamily: 'upheavtt',
+                                        fontSize: 16,
+                                      ),
+                                      children: [
+                                        TextSpan(
+                                            text: 'Curr: ',
+                                            style: TextStyle(
+                                              color: Colors.blue[900],
+                                            )),
+                                        TextSpan(
+                                            text: '1234',
+                                            style: TextStyle(
+                                              color: Colors.yellow[700],
+                                            )),
+                                      ]),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 15),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width - 125,
+                        height: 30,
+                        padding: const EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.blue),
+                          boxShadow: const [
+                            BoxShadow(color: Colors.blue, offset: Offset(5, 5))
+                          ],
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white,
+                        ),
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: RichText(
+                            text: TextSpan(
+                                style: const TextStyle(
+                                  fontFamily: 'upheavtt',
+                                  fontSize: 16,
+                                ),
+                                children: [
+                                  TextSpan(
+                                      text: 'Campus: ',
+                                      style: TextStyle(
+                                        color: Colors.blue[900],
+                                      )),
+                                  TextSpan(
+                                      text: 'Ribeirão Preto',
+                                      style: TextStyle(
+                                        color: Colors.yellow[700],
+                                      )),
+                                ]),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                )),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: Container(
+                width: MediaQuery.of(context).size.width - 80,
+                height: 300,
+                padding: const EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.blue),
+                  boxShadow: const [
+                    BoxShadow(color: Colors.blue, offset: Offset(5, 5))
+                  ],
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
+                ),
+                child: Container(
+                  width: MediaQuery.of(context).size.width - 125,
+                  height: 60,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.blue),
+                    boxShadow: const [
+                      BoxShadow(color: Colors.blue, offset: Offset(5, 5))
+                    ],
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                  ),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10, left: 10),
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(right: 10),
+                              child: Icon(
+                                Icons.school_rounded,
+                                color: Colors.blue[900],
+                              ),
+                            ),
+                            Text(
+                              'Aulas de hoje',
+                              style: TextStyle(
+                                fontFamily: 'upheavtt',
+                                fontSize: 16,
+                                color: Colors.blue[900],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      const Divider(
+                        color: Colors.blue,
+                        thickness: 2,
+                      ),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width - 125,
+                        height: 200,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: ListView(
+                            children: [
+                              Container(
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        SizedBox(
+                                            width: (MediaQuery.of(context)
+                                                        .size
+                                                        .width -
+                                                    125) /
+                                                4,
+                                            child: const Center(
+                                                child: Icon(
+                                                    Icons.pin_drop_rounded))),
+                                        SizedBox(
+                                          width: (MediaQuery.of(context)
+                                                      .size
+                                                      .width -
+                                                  125) /
+                                              4,
+                                          child: const Center(
+                                            child:
+                                                Icon(Icons.menu_book_rounded),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                            width: (MediaQuery.of(context)
+                                                        .size
+                                                        .width -
+                                                    125) /
+                                                4,
+                                            child: const Center(
+                                                child: Icon(Icons
+                                                    .access_time_filled_rounded))),
+                                        SizedBox(
+                                            width: (MediaQuery.of(context)
+                                                        .size
+                                                        .width -
+                                                    125) /
+                                                4,
+                                            child: const Center(
+                                                child: Icon(
+                                                    Icons.check_box_rounded))),
+                                      ],
+                                    ),
+                                    Divider(
+                                      color: Colors.blue,
+                                      thickness: 1,
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        SizedBox(
+                                            width: (MediaQuery.of(context)
+                                                        .size
+                                                        .width -
+                                                    125) /
+                                                4,
+                                            child: const Center(
+                                                child: Text('36B'))),
+                                        SizedBox(
+                                          width: (MediaQuery.of(context)
+                                                      .size
+                                                      .width -
+                                                  125) /
+                                              4,
+                                          child: const Center(
+                                            child: Text(
+                                                'Novas tecnologias de informação e comunicação'),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                            width: (MediaQuery.of(context)
+                                                        .size
+                                                        .width -
+                                                    125) /
+                                                4,
+                                            child: const Center(
+                                                child: Text('08:50'))),
+                                        SizedBox(
+                                            width: (MediaQuery.of(context)
+                                                        .size
+                                                        .width -
+                                                    125) /
+                                                4,
+                                            child: const Center(
+                                                child: Text('0/20'))),
+                                      ],
+                                    ),
+                                    Divider(
+                                      color: Colors.blue,
+                                      thickness: 1,
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        SizedBox(
+                                            width: (MediaQuery.of(context)
+                                                        .size
+                                                        .width -
+                                                    125) /
+                                                4,
+                                            child: const Center(
+                                                child: Text('36B'))),
+                                        SizedBox(
+                                          width: (MediaQuery.of(context)
+                                                      .size
+                                                      .width -
+                                                  125) /
+                                              4,
+                                          child: const Center(
+                                            child: Text(
+                                                'Novas tecnologias de informação e comunicação'),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                            width: (MediaQuery.of(context)
+                                                        .size
+                                                        .width -
+                                                    125) /
+                                                4,
+                                            child: const Center(
+                                                child: Text('08:50'))),
+                                        SizedBox(
+                                            width: (MediaQuery.of(context)
+                                                        .size
+                                                        .width -
+                                                    125) /
+                                                4,
+                                            child: const Center(
+                                                child: Text('0/20'))),
+                                      ],
+                                    ),
+                                    Divider(
+                                      color: Colors.blue,
+                                      thickness: 1,
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                )),
           )
         ],
       ),

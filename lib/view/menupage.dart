@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
 import 'package:animate_gradient/animate_gradient.dart';
-import 'package:myproject/mywidgets/verticalbarscreenview.dart';
+import 'package:myproject/widgets/verticalbarscreenview.dart';
 import 'package:myproject/view/menuabas/abahome.dart';
 import 'package:myproject/view/menuabas/abainfo.dart';
 
@@ -46,6 +46,7 @@ class _MenuPageState extends State<MenuPage> {
                   height: MediaQuery.of(context).size.height - 10,
                   width: MediaQuery.of(context).size.width - 70,
                   child: PageView(
+                    physics: const NeverScrollableScrollPhysics(),
                     scrollDirection: Axis.vertical,
                     controller: _pageController,
                     children: const [AbaHome(), AbaInfo()],
