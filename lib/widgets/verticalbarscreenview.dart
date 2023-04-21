@@ -49,37 +49,47 @@ class _VerticalBarScreenViewState extends State<VerticalBarScreenView> {
               onPressed: () {
                 widget.page0();
               },
-              icon: const Icon(Icons.home)),
+              icon: const Icon(Icons.home,
+                  color: Color.fromARGB(255, 13, 71, 161))),
           IconButton(
               tooltip: 'Perfil',
               onPressed: () {
                 widget.page1();
               },
-              icon: const Icon(Icons.person_rounded)),
+              icon: const Icon(Icons.person_rounded,
+                  color: Color.fromARGB(255, 13, 71, 161))),
           IconButton(
               tooltip: 'Consultas',
               onPressed: () {},
-              icon: const Icon(Icons.search_rounded)),
+              icon: const Icon(
+                Icons.search_rounded,
+                color: Color.fromARGB(255, 13, 71, 161),
+              )),
           IconButton(
               tooltip: 'Ferramentas',
               onPressed: () {},
-              icon: const Icon(Icons.engineering_rounded)),
+              icon: const Icon(Icons.engineering_rounded,
+                  color: Color.fromARGB(255, 13, 71, 161))),
           IconButton(
               tooltip: 'Requerimentos',
               onPressed: () {},
-              icon: const Icon(Icons.assistant_rounded)),
+              icon: const Icon(Icons.assistant_rounded,
+                  color: Color.fromARGB(255, 13, 71, 161))),
           IconButton(
               tooltip: 'Financeiro',
               onPressed: () {},
-              icon: const Icon(Icons.attach_money_rounded)),
+              icon: const Icon(Icons.attach_money_rounded,
+                  color: Color.fromARGB(255, 13, 71, 161))),
           IconButton(
               tooltip: 'Matrícula',
               onPressed: () {},
-              icon: const Icon(Icons.school_rounded)),
+              icon: const Icon(Icons.school_rounded,
+                  color: Color.fromARGB(255, 13, 71, 161))),
           IconButton(
               tooltip: 'Informações',
               onPressed: () {},
-              icon: const Icon(Icons.info_rounded))
+              icon: const Icon(Icons.info_rounded,
+                  color: Color.fromARGB(255, 13, 71, 161)))
         ],
       ),
     );
