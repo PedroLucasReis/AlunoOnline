@@ -59,21 +59,27 @@ class _VerticalBarScreenViewState extends State<VerticalBarScreenView> {
               icon: const Icon(Icons.person_rounded,
                   color: Color.fromARGB(255, 13, 71, 161))),
           IconButton(
-              tooltip: 'Consultas',
-              onPressed: () {},
+              tooltip: 'Boletim',
+              onPressed: () {
+                widget.page2();
+              },
               icon: const Icon(
-                Icons.search_rounded,
+                Icons.local_play_rounded,
                 color: Color.fromARGB(255, 13, 71, 161),
               )),
           IconButton(
-              tooltip: 'Ferramentas',
-              onPressed: () {},
-              icon: const Icon(Icons.engineering_rounded,
+              tooltip: 'Avisos',
+              onPressed: () {
+                widget.page3();
+              },
+              icon: const Icon(Icons.notifications_rounded,
                   color: Color.fromARGB(255, 13, 71, 161))),
           IconButton(
-              tooltip: 'Requerimentos',
-              onPressed: () {},
-              icon: const Icon(Icons.assistant_rounded,
+              tooltip: 'Data das provas',
+              onPressed: () {
+                widget.page4();
+              },
+              icon: const Icon(Icons.date_range_rounded,
                   color: Color.fromARGB(255, 13, 71, 161))),
           IconButton(
               tooltip: 'Financeiro',

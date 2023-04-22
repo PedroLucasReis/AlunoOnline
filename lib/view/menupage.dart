@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
 import 'package:animate_gradient/animate_gradient.dart';
+import 'package:myproject/view/menuabas/abanotes.dart';
+import 'package:myproject/view/menuabas/abanotify.dart';
 import 'package:myproject/view/menuabas/abaprofile.dart';
+import 'package:myproject/view/menuabas/abatestdate.dart';
 import 'package:myproject/widgets/verticalbarscreenview.dart';
 import 'package:myproject/view/menuabas/abahome.dart';
 import 'package:myproject/view/menuabas/abainfo.dart';
@@ -53,6 +56,9 @@ class _MenuPageState extends State<MenuPage> {
                     children: const [
                       AbaHome(),
                       AbaProfile(),
+                      AbaNotes(),
+                      AbaNotify(),
+                      AbaTestDate(),
                       AbaInfo(),
                     ],
                   ),
@@ -83,15 +89,18 @@ class _MenuPageState extends State<MenuPage> {
   }
 
   void page2() {
-    setState(() {});
+    _pageController?.animateToPage(2,
+        duration: const Duration(milliseconds: 750), curve: Curves.ease);
   }
 
   void page3() {
-    setState(() {});
+    _pageController?.animateToPage(3,
+        duration: const Duration(milliseconds: 750), curve: Curves.ease);
   }
 
   void page4() {
-    setState(() {});
+    _pageController?.animateToPage(4,
+        duration: const Duration(milliseconds: 750), curve: Curves.ease);
   }
 
   void page5() {
