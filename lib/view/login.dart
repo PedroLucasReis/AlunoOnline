@@ -120,7 +120,6 @@ class _LoginState extends State<Login> {
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: TextField(
                             textAlignVertical: TextAlignVertical.center,
-                            keyboardType: TextInputType.number,
                             decoration: InputDecoration(
                                 fillColor: Colors.blue,
                                 enabledBorder: const OutlineInputBorder(

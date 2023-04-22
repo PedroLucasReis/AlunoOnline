@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:myproject/view/menuabas/abaprofileview/abaprofiledata.dart';
+import 'package:myproject/view/menuabas/abaprofileview/abaprofilepass.dart';
 
 class AbaProfile extends StatefulWidget {
   const AbaProfile({super.key});
@@ -49,52 +51,7 @@ class _AbaProfileState extends State<AbaProfile> {
                         )
                       ]))),
         ),
-        body: TabBarView(children: [
-          SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-              child: Container(
-                padding: const EdgeInsets.all(5),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.blue),
-                  boxShadow: const [
-                    BoxShadow(color: Colors.blue, offset: Offset(5, 5))
-                  ],
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.white,
-                ),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height - 150,
-                      child: ListView(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.blue),
-                              boxShadow: const [
-                                BoxShadow(
-                                    color: Colors.blue, offset: Offset(5, 5))
-                              ],
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.white,
-                            ),
-                            child: Column(
-                              children: [Text('data'), TextField()],
-                            ),
-                          ),
-                          Container()
-                        ],
-                      ),
-                    ),
-                    ElevatedButton(onPressed: () {}, child: Text('Salvar'))
-                  ],
-                ),
-              ),
-            ),
-          ),
-          Container()
-        ]),
+        body: TabBarView(children: [const AbaProfileData(), AbaProfilePass()]),
       ),
     );
   }
