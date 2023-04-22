@@ -17,10 +17,30 @@ class _AbaProfileState extends State<AbaProfile> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
-          toolbarHeight: 0,
           backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent,
           automaticallyImplyLeading: false,
+          titleSpacing: 0,
+          title: Container(
+              width: MediaQuery.of(context).size.width - 75,
+              height: 30,
+              padding: const EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.blue),
+                boxShadow: const [
+                  BoxShadow(color: Colors.blue, offset: Offset(5, 5))
+                ],
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.white,
+              ),
+              child: Text(
+                'Perfil:',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontFamily: 'upheavtt',
+                    color: Colors.blue[900],
+                    fontSize: 16),
+              )),
           bottom: PreferredSize(
               preferredSize: const Size.fromHeight(60),
               child: Container(

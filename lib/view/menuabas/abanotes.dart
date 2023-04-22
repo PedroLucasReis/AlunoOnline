@@ -12,22 +12,12 @@ class _AbaNotesState extends State<AbaNotes> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-      body: Container(
-        width: MediaQuery.of(context).size.width - 80,
-        height: 450,
-        padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.blue),
-          boxShadow: const [
-            BoxShadow(color: Colors.blue, offset: Offset(5, 5))
-          ],
-          borderRadius: BorderRadius.circular(10),
-          color: Colors.white,
-        ),
+      body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-                width: MediaQuery.of(context).size.width - 125,
+                width: MediaQuery.of(context).size.width - 80,
                 height: 30,
                 padding: const EdgeInsets.all(5),
                 decoration: BoxDecoration(
@@ -49,14 +39,14 @@ class _AbaNotesState extends State<AbaNotes> {
             Padding(
               padding: const EdgeInsets.only(top: 10),
               child: SizedBox(
-                width: MediaQuery.of(context).size.width - 125,
+                width: MediaQuery.of(context).size.width - 80,
                 height: 375,
                 child: ListView(
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(top: 10),
                       child: Container(
-                        width: MediaQuery.of(context).size.width - 125,
+                        width: MediaQuery.of(context).size.width - 80,
                         height: 175,
                         decoration: BoxDecoration(
                           border: Border.all(color: Colors.blue),
@@ -67,12 +57,11 @@ class _AbaNotesState extends State<AbaNotes> {
                           color: Colors.white,
                         ),
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(5),
                               child: Container(
-                                width: MediaQuery.of(context).size.width - 135,
+                                width: MediaQuery.of(context).size.width - 125,
                                 height: 50,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
@@ -135,7 +124,7 @@ class _AbaNotesState extends State<AbaNotes> {
                     Padding(
                       padding: const EdgeInsets.only(top: 10),
                       child: Container(
-                        width: MediaQuery.of(context).size.width - 125,
+                        width: MediaQuery.of(context).size.width - 80,
                         height: 175,
                         decoration: BoxDecoration(
                           border: Border.all(color: Colors.blue),
@@ -146,12 +135,11 @@ class _AbaNotesState extends State<AbaNotes> {
                           color: Colors.white,
                         ),
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(5),
                               child: Container(
-                                width: MediaQuery.of(context).size.width - 135,
+                                width: MediaQuery.of(context).size.width - 125,
                                 height: 50,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),

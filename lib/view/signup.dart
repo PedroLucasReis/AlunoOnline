@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
 import 'package:animate_gradient/animate_gradient.dart';
+import 'package:myproject/view/menupage.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -215,7 +216,11 @@ class _SignUpState extends State<SignUp> {
                                 children: [
                                   TextButton(
                                     onPressed: () {
-                                      Navigator.pop(context);
+                                      Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const MenuPage()));
                                     },
                                     child: Text(
                                       'Cadastrar',

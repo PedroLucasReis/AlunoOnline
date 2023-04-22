@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
 import 'package:animate_gradient/animate_gradient.dart';
+import 'package:myproject/view/menuabas/abafinancial.dart';
 import 'package:myproject/view/menuabas/abanotes.dart';
 import 'package:myproject/view/menuabas/abanotify.dart';
 import 'package:myproject/view/menuabas/abaprofile.dart';
+import 'package:myproject/view/menuabas/abateacher.dart';
 import 'package:myproject/view/menuabas/abatestdate.dart';
 import 'package:myproject/widgets/verticalbarscreenview.dart';
 import 'package:myproject/view/menuabas/abahome.dart';
@@ -59,6 +61,8 @@ class _MenuPageState extends State<MenuPage> {
                       AbaNotes(),
                       AbaNotify(),
                       AbaTestDate(),
+                      AbaTeacher(),
+                      AbaFinancial(),
                       AbaInfo(),
                     ],
                   ),
@@ -72,6 +76,7 @@ class _MenuPageState extends State<MenuPage> {
                 page4: page4,
                 page5: page5,
                 page6: page6,
+                page7: page7,
               ),
             ],
           )),
@@ -104,10 +109,19 @@ class _MenuPageState extends State<MenuPage> {
   }
 
   void page5() {
-    setState(() {});
+    _pageController?.animateToPage(5,
+        duration: const Duration(milliseconds: 750), curve: Curves.ease);
   }
 
   void page6() {
-    setState(() {});
+    _pageController?.animateToPage(6,
+        duration: const Duration(milliseconds: 750), curve: Curves.ease);
+  }
+
+  void page7() {
+    setState(() {
+      _pageController?.animateToPage(7,
+          duration: const Duration(milliseconds: 750), curve: Curves.ease);
+    });
   }
 }
