@@ -18,17 +18,25 @@ class MenuPage extends StatefulWidget {
   State<MenuPage> createState() => _MenuPageState();
 }
 
-class _MenuPageState extends State<MenuPage> {
+class _MenuPageState extends State<MenuPage>
+    with SingleTickerProviderStateMixin {
   PageController? _pageController;
+  late AnimationController _controller;
 
   @override
   void initState() {
     super.initState();
     _pageController = PageController();
+    _controller = AnimationController(
+        vsync: this,
+        duration: const Duration(seconds: 4),
+        reverseDuration: const Duration(seconds: 4));
+    _controller.repeat(reverse: true);
   }
 
   @override
   void dispose() {
+    _controller.dispose();
     super.dispose();
     _pageController?.dispose();
   }

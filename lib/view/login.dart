@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
 import 'package:animate_gradient/animate_gradient.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:myproject/view/menupage.dart';
 import 'package:myproject/view/signup.dart';
 
@@ -11,10 +12,29 @@ class Login extends StatefulWidget {
   State<Login> createState() => _LoginState();
 }
 
-class _LoginState extends State<Login> {
+class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+        vsync: this,
+        duration: const Duration(seconds: 4),
+        reverseDuration: const Duration(seconds: 4));
+    _controller.repeat(reverse: true);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose(); // dispose do AnimationController
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AnimateGradient(
+        controller: _controller,
         primaryColors: const [Colors.white, Colors.blue],
         secondaryColors: const [Colors.yellow, Colors.white],
         primaryBegin: Alignment.topCenter,

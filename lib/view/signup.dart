@@ -10,10 +10,29 @@ class SignUp extends StatefulWidget {
   State<SignUp> createState() => _SignUpState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+        vsync: this,
+        duration: const Duration(seconds: 4),
+        reverseDuration: const Duration(seconds: 4));
+    _controller.repeat(reverse: true);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose(); // dispose do AnimationController
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AnimateGradient(
+        controller: _controller,
         primaryColors: const [Colors.white, Colors.blue],
         secondaryColors: const [Colors.yellow, Colors.white],
         primaryBegin: Alignment.topCenter,
