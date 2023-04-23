@@ -81,7 +81,7 @@ class _AbaFinancialState extends State<AbaFinancial> {
                       child: Container(
                         width: MediaQuery.of(context).size.width - 125,
                         height: 50,
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           border: Border.all(color: Colors.blue),
                           borderRadius: BorderRadius.circular(10),
@@ -122,7 +122,7 @@ class _AbaFinancialState extends State<AbaFinancial> {
                       child: Container(
                         width: MediaQuery.of(context).size.width - 125,
                         height: 50,
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           border: Border.all(color: Colors.blue),
                           borderRadius: BorderRadius.circular(10),
@@ -206,7 +206,7 @@ class _AbaFinancialState extends State<AbaFinancial> {
                       child: Container(
                         width: MediaQuery.of(context).size.width - 125,
                         height: 50,
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           border: Border.all(color: Colors.blue),
                           borderRadius: BorderRadius.circular(10),
@@ -247,7 +247,7 @@ class _AbaFinancialState extends State<AbaFinancial> {
                       child: Container(
                         width: MediaQuery.of(context).size.width - 125,
                         height: 50,
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           border: Border.all(color: Colors.blue),
                           borderRadius: BorderRadius.circular(10),

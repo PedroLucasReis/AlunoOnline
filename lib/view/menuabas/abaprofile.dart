@@ -71,7 +71,7 @@ class _AbaProfileState extends State<AbaProfile> {
                         )
                       ]))),
         ),
-        body: TabBarView(children: [const AbaProfileData(), AbaProfilePass()]),
+        body: const TabBarView(children: [AbaProfileData(), AbaProfilePass()]),
       ),
     );
   }

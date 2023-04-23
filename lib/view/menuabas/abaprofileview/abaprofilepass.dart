@@ -31,7 +31,7 @@ class _AbaProfilePassState extends State<AbaProfilePass> {
                 Container(
                   height: 265,
                   width: MediaQuery.of(context).size.width - 125,
-                  padding: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.blue),
                     boxShadow: const [

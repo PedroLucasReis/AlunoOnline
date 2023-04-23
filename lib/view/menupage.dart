@@ -23,7 +23,6 @@ class _MenuPageState extends State<MenuPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _pageController = PageController();
   }
