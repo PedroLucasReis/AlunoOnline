@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
 import 'package:animate_gradient/animate_gradient.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:myproject/view/menupage.dart';
 import 'package:myproject/view/signup.dart';
 
