@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "736154447781",
+    "project_id": "alunoonline-1f531",
+    "storage_bucket": "alunoonline-1f531.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:736154447781:android:cad2b8ec6f2e0422d2c24c",
+        "android_client_info": {
+          "package_name": "com.example.myproject"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3xAyoHlV3Dui7wbTmWan1DWZAND-fauo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
