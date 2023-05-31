@@ -14,53 +14,65 @@ class UserController extends Model {
   final UserModel userMain = UserModel();
 
   Future<void> signUp(
-      {required String email,
+      {required String name,
+      required String code,
+      required String email,
       required String pass,
+      required String confpass,
       required VoidCallback onSuccess,
-      required VoidCallback confirmCode,
-      required VoidCallback invalidPhone,
-      required VoidCallback verifyFail,
-      required VoidCallback conectionFail}) async {
+      required VoidCallback weakpass,
+      required VoidCallback usedemail,
+      required VoidCallback unknownerror,
+      required VoidCallback noconected}) async {
     isLoading = true;
     notifyListeners();
 
-    try {
-      await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email, password: pass);
-    } catch (e) {
-      // Ocorreu um erro durante a criação do usuário
-      if (e is FirebaseAuthException) {
-        // Lidar com erros específicos do FirebaseAuth
-        if (e.code == 'weak-password') {
-          print('A senha é muito fraca.');
-        } else if (e.code == 'email-already-in-use') {
-          print('O email já está em uso por outra conta.');
+    bool? state;
+    state = await SystemController().conectionTest();
+
+    if (state == false) {
+      noconected();
+    } else {
+      try {
+        await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(email: email, password: pass);
+        await saveUserData(name: name, code: code);
+      } catch (e) {
+        // Ocorreu um erro durante a criação do usuário
+        if (e is FirebaseAuthException) {
+          // Lidar com erros específicos do FirebaseAuth
+          if (e.code == 'weak-password') {
+            weakpass();
+          } else if (e.code == 'email-already-in-use') {
+            usedemail();
+          } else {
+            unknownerror();
+          }
         } else {
-          print('Erro desconhecido: ${e.message}');
+          // Lidar com outros erros
+          unknownerror();
         }
-      } else {
-        // Lidar com outros erros
-        print('Erro desconhecido: $e');
       }
     }
   }
 
   //Validate confirm code of phone number
-  Future<void> signIn({
-    required String email,
-    required String pass,
-    required VoidCallback onSuccess,
-    required VoidCallback invalidCode,
-    required VoidCallback onFail,
-  }) async {
+  Future<void> signIn(
+      {required String email,
+      required String pass,
+      required VoidCallback onSuccess,
+      required VoidCallback notfound,
+      required VoidCallback wrongpass,
+      required VoidCallback unknownerror,
+      required VoidCallback noconected}) async {
     isLoading = true;
     notifyListeners();
-    bool? state;
 
+    bool? state;
     state = await SystemController().conectionTest();
 
     if (state == false) {
-      onFail();
+      noconected();
     } else {
       try {
         FirebaseAuth.instance
@@ -71,15 +83,15 @@ class UserController extends Model {
         if (e is FirebaseAuthException) {
           // Lidar com erros específicos do FirebaseAuth
           if (e.code == 'user-not-found') {
-            print('Usuário não encontrado.');
+            notfound();
           } else if (e.code == 'wrong-password') {
-            print('Senha incorreta.');
+            wrongpass();
           } else {
-            print('Erro desconhecido: ${e.message}');
+            unknownerror();
           }
         } else {
           // Lidar com outros erros
-          print('Erro desconhecido: $e');
+          unknownerror();
         }
       }
     }
@@ -91,9 +103,12 @@ class UserController extends Model {
   //Saves user data on Firebase database
   Future<void> saveUserData({
     String? name,
-    String? skinName,
-    required VoidCallback onSuccess,
-    required VoidCallback onFail,
+    String? code,
+    String? email,
+    String? pass,
+    String? confpass,
+    VoidCallback? onSuccess,
+    VoidCallback? onFail,
   }) async {
     isLoading = true;
     notifyListeners();
@@ -101,19 +116,18 @@ class UserController extends Model {
 
     if (user != null) {
       try {
-        if (skinName != null) {
-          userMain.setSkinName(skinName);
-        }
+        userMain.setAll({'name': name, 'code': code});
         await FirebaseFirestore.instance
             .collection("users")
-            .doc(user.phoneNumber)
+            .doc(user.uid)
             .set(userMain.getAll());
-        if (name != null) {
-          await user.updateDisplayName(name);
+        if (onSuccess != null) {
+          onSuccess();
         }
-        onSuccess();
       } catch (e) {
-        onFail();
+        if (onFail != null) {
+          onFail();
+        }
       }
     }
     isLoading = false;
