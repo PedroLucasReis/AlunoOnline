@@ -36,7 +36,6 @@ class UserController extends Model {
       try {
         await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email, password: pass);
-        await saveUserData(name: name, code: code);
       } catch (e) {
         // Ocorreu um erro durante a criação do usuário
         if (e is FirebaseAuthException) {
@@ -51,8 +50,12 @@ class UserController extends Model {
         } else {
           // Lidar com outros erros
           unknownerror();
+          print(email);
+          print(pass);
         }
       }
+      isLoading = false;
+      notifyListeners();
     }
   }
 
@@ -162,5 +165,18 @@ class UserController extends Model {
       return user.uid;
     }
     return null;
+  }
+
+  Future<void> recpass({
+    required String email,
+    required VoidCallback onSuccess,
+    required VoidCallback onFail,
+  }) async {
+    try {
+      FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      onSuccess();
+    } catch (e) {
+      onFail();
+    }
   }
 }

@@ -18,6 +18,7 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late TextEditingController _emailcontroller;
   late TextEditingController _passcontroller;
+  late TextEditingController _recemailcontroller;
 
   @override
   void initState() {
@@ -29,6 +30,7 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
     _controller.repeat(reverse: true);
     _emailcontroller = TextEditingController();
     _passcontroller = TextEditingController();
+    _recemailcontroller = TextEditingController();
   }
 
   @override
@@ -276,6 +278,8 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                                                                 horizontal: 24,
                                                                 vertical: 10),
                                                         child: TextField(
+                                                          controller:
+                                                              _recemailcontroller,
                                                           textAlignVertical:
                                                               TextAlignVertical
                                                                   .center,
@@ -319,27 +323,15 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                                                               fontSize: 16),
                                                         ),
                                                         onPressed: () {
+                                                          model.recpass(
+                                                              email:
+                                                                  _recemailcontroller
+                                                                      .text,
+                                                              onSuccess:
+                                                                  _onRecSuccess,
+                                                              onFail: _onFail);
                                                           Navigator.pop(
                                                               context);
-                                                          ScaffoldMessenger.of(
-                                                                  context)
-                                                              .showSnackBar(
-                                                                  SnackBar(
-                                                                      backgroundColor:
-                                                                          Colors.blue[
-                                                                              900],
-                                                                      content:
-                                                                          const Text(
-                                                                        'Email enviado!',
-                                                                        style: TextStyle(
-                                                                            letterSpacing:
-                                                                                2,
-                                                                            fontFamily:
-                                                                                'upheavtt',
-                                                                            color:
-                                                                                Colors.white,
-                                                                            fontSize: 16),
-                                                                      )));
                                                         },
                                                       )
                                                     ],
@@ -376,6 +368,56 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
   void _onSuccess() {
     Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => const MenuPage()));
+  }
+
+  void _onRecSuccess() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+            side: BorderSide(
+              color: Color.fromARGB(255, 13, 71, 161),
+            )),
+        content: Text(
+          'Email de recuperação enviado!',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 20,
+            color: Colors.black,
+            fontFamily: "upheavtt",
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        backgroundColor: Colors.white,
+        behavior: SnackBarBehavior.floating,
+        clipBehavior: Clip.antiAlias,
+      ),
+    );
+  }
+
+  void _onFail() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+            side: BorderSide(
+              color: Color.fromARGB(255, 13, 71, 161),
+            )),
+        content: Text(
+          'Falha ao enviar o email de recuperação',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 20,
+            color: Colors.black,
+            fontFamily: "upheavtt",
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        backgroundColor: Colors.white,
+        behavior: SnackBarBehavior.floating,
+        clipBehavior: Clip.antiAlias,
+      ),
+    );
   }
 
   void _notfound() {

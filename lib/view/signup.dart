@@ -407,7 +407,7 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
               color: Color.fromARGB(255, 13, 71, 161),
             )),
         content: Text(
-          'Falha desconhecida ao entrar!',
+          'Falha desconhecida ao cadastrar!',
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 20,

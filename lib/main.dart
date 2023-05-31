@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:flutter/material.dart';
 import 'package:myproject/view/login.dart';
 import 'package:scoped_model/scoped_model.dart';
