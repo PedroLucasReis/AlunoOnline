@@ -1,7 +1,10 @@
+// ignore_for_file: depend_on_referenced_packages
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:myproject/controller/system_controller.dart';
+
 import 'package:scoped_model/scoped_model.dart';
 
 import 'package:flutter/material.dart';
@@ -10,6 +13,12 @@ import '../model/users.dart';
 
 class UserController extends Model {
   bool isLoading = false;
+  bool initialized = false;
+
+  Future<void> init() async {
+    Firebase.initializeApp();
+    initialized = true;
+  }
 
   final UserModel userMain = UserModel();
 
@@ -26,6 +35,11 @@ class UserController extends Model {
       required VoidCallback noconected}) async {
     isLoading = true;
     notifyListeners();
+
+    if (initialized == false) {
+      await init();
+      initialized = true;
+    }
 
     bool? state;
     state = await SystemController().conectionTest();
@@ -50,8 +64,7 @@ class UserController extends Model {
         } else {
           // Lidar com outros erros
           unknownerror();
-          print(email);
-          print(pass);
+          print(e);
         }
       }
       isLoading = false;
@@ -68,6 +81,10 @@ class UserController extends Model {
       required VoidCallback wrongpass,
       required VoidCallback unknownerror,
       required VoidCallback noconected}) async {
+    if (initialized == false) {
+      init();
+      initialized = true;
+    }
     isLoading = true;
     notifyListeners();
 
