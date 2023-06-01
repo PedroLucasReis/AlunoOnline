@@ -1,26 +1,27 @@
 // ignore_for_file: depend_on_referenced_packages
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:myproject/controller/system_controller.dart';
-
 import 'package:scoped_model/scoped_model.dart';
-
 import 'package:flutter/material.dart';
-
 import '../model/users.dart';
 
 class UserController extends Model {
   bool isLoading = false;
-  bool initialized = false;
-
-  Future<void> init() async {
-    Firebase.initializeApp();
-    initialized = true;
-  }
-
   final UserModel userMain = UserModel();
+
+  UserController() {
+    User? loged = FirebaseAuth.instance.currentUser;
+    if (loged != null) {
+      try {
+        loadCurrentUser();
+      } catch (e) {
+        userMain.setName('Desconhecido');
+        userMain.setCode('000000');
+      }
+    }
+  }
 
   Future<void> signUp(
       {required String name,
@@ -36,11 +37,6 @@ class UserController extends Model {
     isLoading = true;
     notifyListeners();
 
-    if (initialized == false) {
-      await init();
-      initialized = true;
-    }
-
     bool? state;
     state = await SystemController().conectionTest();
 
@@ -50,6 +46,8 @@ class UserController extends Model {
       try {
         await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email, password: pass);
+        saveUserData(name: name, code: code);
+        onSuccess();
       } catch (e) {
         // Ocorreu um erro durante a criação do usuário
         if (e is FirebaseAuthException) {
@@ -64,7 +62,6 @@ class UserController extends Model {
         } else {
           // Lidar com outros erros
           unknownerror();
-          print(e);
         }
       }
       isLoading = false;
@@ -73,7 +70,7 @@ class UserController extends Model {
   }
 
   //Validate confirm code of phone number
-  Future<void> signIn(
+  void signIn(
       {required String email,
       required String pass,
       required VoidCallback onSuccess,
@@ -81,10 +78,6 @@ class UserController extends Model {
       required VoidCallback wrongpass,
       required VoidCallback unknownerror,
       required VoidCallback noconected}) async {
-    if (initialized == false) {
-      init();
-      initialized = true;
-    }
     isLoading = true;
     notifyListeners();
 
@@ -95,9 +88,12 @@ class UserController extends Model {
       noconected();
     } else {
       try {
-        FirebaseAuth.instance
-            .signInWithEmailAndPassword(email: email, password: pass);
-        onSuccess();
+        await FirebaseAuth.instance
+            .signInWithEmailAndPassword(email: email, password: pass)
+            .then((value) {
+          loadCurrentUser();
+          onSuccess();
+        });
       } catch (e) {
         // Ocorreu um erro durante o login
         if (e is FirebaseAuthException) {
@@ -124,9 +120,6 @@ class UserController extends Model {
   Future<void> saveUserData({
     String? name,
     String? code,
-    String? email,
-    String? pass,
-    String? confpass,
     VoidCallback? onSuccess,
     VoidCallback? onFail,
   }) async {
@@ -154,7 +147,7 @@ class UserController extends Model {
     notifyListeners();
   }
 
-  Future<void> _loadCurrentUser() async {
+  Future<void> loadCurrentUser() async {
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       DocumentSnapshot docUser = await FirebaseFirestore.instance

@@ -9,12 +9,20 @@ class UserModel {
     _info = all;
   }
 
-  String? getSkinName() {
-    return _info['skinName'];
+  String? getName() {
+    return _info['name'];
   }
 
-  void setSkinName(String? skinName) {
-    _info['skinName'] = skinName;
+  void setName(String? name) {
+    _info['name'] = name;
+  }
+
+  String? getCode() {
+    return _info['code'];
+  }
+
+  void setCode(String? code) {
+    _info['code'] = code;
   }
 
   String? getEmail() {
