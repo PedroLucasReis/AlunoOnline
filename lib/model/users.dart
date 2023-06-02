@@ -1,5 +1,5 @@
 class UserModel {
-  Map<String, dynamic> _info = {};
+  Map<String, dynamic> _info = {'name': ''};
 
   Map<String, dynamic> getAll() {
     return _info;
@@ -9,7 +9,7 @@ class UserModel {
     _info = all;
   }
 
-  String? getName() {
+  String getName() {
     return _info['name'];
   }
 

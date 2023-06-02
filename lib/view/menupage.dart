@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:animate_gradient/animate_gradient.dart';
 import 'package:myproject/view/login.dart';
-import 'package:myproject/view/menuabas/abafinancial.dart';
+
 import 'package:myproject/view/menuabas/abanotes.dart';
 import 'package:myproject/view/menuabas/abanotify.dart';
 import 'package:myproject/view/menuabas/abaprofile.dart';
@@ -78,7 +78,6 @@ class _MenuPageState extends State<MenuPage>
                           AbaNotify(),
                           AbaTestDate(),
                           AbaTeacher(),
-                          AbaFinancial(),
                           AbaInfo(),
                         ],
                       ),
@@ -92,7 +91,6 @@ class _MenuPageState extends State<MenuPage>
                     page4: page4,
                     page5: page5,
                     page6: page6,
-                    page7: page7,
                     logout: _comeback,
                   ),
                 ],

@@ -60,28 +60,38 @@ class _AbaHomeState extends State<AbaHome> {
                         child: Row(
                           children: [
                             Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(color: Colors.blue),
-                                boxShadow: const [
-                                  BoxShadow(
-                                      color: Colors.blue, offset: Offset(5, 5))
-                                ],
-                                borderRadius: BorderRadius.circular(50),
-                                color: Colors.white,
-                              ),
-                              child: const CircleAvatar(
-                                  radius: 50,
-                                  backgroundImage:
-                                      AssetImage('images/anonimo.jpg')),
-                            ),
+                                height: 100,
+                                width: MediaQuery.of(context).size.width *
+                                    20 /
+                                    100,
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.blue),
+                                  boxShadow: const [
+                                    BoxShadow(
+                                        color: Colors.blue,
+                                        offset: Offset(5, 5))
+                                  ],
+                                  borderRadius: BorderRadius.circular(50),
+                                  color: Colors.white,
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    model.userMain.getName()[0].toUpperCase(),
+                                    style: TextStyle(
+                                        fontFamily: 'upheavtt',
+                                        fontSize: 50,
+                                        color: Colors.yellow[700]),
+                                  ),
+                                )),
                             Padding(
                               padding: const EdgeInsets.all(10),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Container(
-                                    width:
-                                        MediaQuery.of(context).size.width - 220,
+                                    width: MediaQuery.of(context).size.width *
+                                        57 /
+                                        100,
                                     height: 30,
                                     padding: const EdgeInsets.all(5),
                                     decoration: BoxDecoration(
@@ -115,8 +125,9 @@ class _AbaHomeState extends State<AbaHome> {
                                   Padding(
                                     padding: const EdgeInsets.only(top: 15),
                                     child: Container(
-                                      width: MediaQuery.of(context).size.width -
-                                          220,
+                                      width: MediaQuery.of(context).size.width *
+                                          57 /
+                                          100,
                                       height: 30,
                                       padding: const EdgeInsets.all(5),
                                       decoration: BoxDecoration(
