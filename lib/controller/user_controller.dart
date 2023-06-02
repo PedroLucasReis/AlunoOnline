@@ -176,7 +176,7 @@ class UserController extends Model {
     required VoidCallback onFail,
   }) async {
     try {
-      FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
       onSuccess();
     } catch (e) {
       onFail();
