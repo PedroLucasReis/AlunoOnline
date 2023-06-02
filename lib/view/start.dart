@@ -36,7 +36,7 @@ class _StartPageState extends State<StartPage> {
             Padding(
                 padding: const EdgeInsets.only(top: 75),
                 child: Image.asset(
-                  'imagess/logo.png',
+                  'images/logo.png',
                   scale: 7,
                 )),
             Padding(
@@ -81,18 +81,18 @@ class _StartPageState extends State<StartPage> {
   Future<void> tela2() async {
     User? loged = FirebaseAuth.instance.currentUser;
     if (loged != null) {
-      Future.delayed(const Duration(seconds: 2), () {
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) {
-          return const Login();
-        }));
-      });
-    } else {
       await load;
       Future.delayed(const Duration(seconds: 2), () {
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) {
           return const MenuPage();
+        }));
+      });
+    } else {
+      Future.delayed(const Duration(seconds: 2), () {
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) {
+          return const Login();
         }));
       });
     }

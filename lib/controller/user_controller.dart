@@ -104,6 +104,7 @@ class UserController extends Model {
             wrongpass();
           } else {
             unknownerror();
+            print(e);
           }
         } else {
           // Lidar com outros erros
