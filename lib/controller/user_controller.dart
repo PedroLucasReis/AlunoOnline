@@ -143,11 +143,12 @@ class UserController extends Model {
             .collection("users")
             .where('uid', isEqualTo: user.uid)
             .get(const GetOptions());
-
-        userMain.setAll({
+        Map<String, dynamic> all = userMain.getAll();
+        all.addAll({
           "name": docUser.docs[0].get('name'),
           "code": docUser.docs[0].get('code'),
         });
+        userMain.setAll(all);
       } catch (e) {
         print(e);
         print(user.uid.toString());

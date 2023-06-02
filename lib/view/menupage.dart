@@ -7,8 +7,7 @@ import 'package:myproject/view/login.dart';
 import 'package:myproject/view/menuabas/abanotes.dart';
 import 'package:myproject/view/menuabas/abanotify.dart';
 import 'package:myproject/view/menuabas/abaprofile.dart';
-import 'package:myproject/view/menuabas/abateacher.dart';
-import 'package:myproject/view/menuabas/abatestdate.dart';
+
 import 'package:myproject/widgets/verticalbarscreenview.dart';
 import 'package:myproject/view/menuabas/abahome.dart';
 import 'package:myproject/view/menuabas/abainfo.dart';
@@ -76,8 +75,6 @@ class _MenuPageState extends State<MenuPage>
                           AbaProfile(),
                           AbaNotes(),
                           AbaNotify(),
-                          AbaTestDate(),
-                          AbaTeacher(),
                           AbaInfo(),
                         ],
                       ),
@@ -89,8 +86,6 @@ class _MenuPageState extends State<MenuPage>
                     page2: page2,
                     page3: page3,
                     page4: page4,
-                    page5: page5,
-                    page6: page6,
                     logout: _comeback,
                   ),
                 ],
@@ -123,23 +118,6 @@ class _MenuPageState extends State<MenuPage>
   void page4() {
     _pageController?.animateToPage(4,
         duration: const Duration(milliseconds: 750), curve: Curves.ease);
-  }
-
-  void page5() {
-    _pageController?.animateToPage(5,
-        duration: const Duration(milliseconds: 750), curve: Curves.ease);
-  }
-
-  void page6() {
-    _pageController?.animateToPage(6,
-        duration: const Duration(milliseconds: 750), curve: Curves.ease);
-  }
-
-  void page7() {
-    setState(() {
-      _pageController?.animateToPage(7,
-          duration: const Duration(milliseconds: 750), curve: Curves.ease);
-    });
   }
 
   void _comeback() {

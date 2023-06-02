@@ -261,7 +261,7 @@ class _AbaHomeState extends State<AbaHome> {
                                 children: [
                                   Container(
                                     width:
-                                        MediaQuery.of(context).size.width - 350,
+                                        MediaQuery.of(context).size.width - 400,
                                     height: 30,
                                     padding: const EdgeInsets.all(5),
                                     decoration: BoxDecoration(
@@ -282,12 +282,12 @@ class _AbaHomeState extends State<AbaHome> {
                                           ),
                                           children: [
                                             TextSpan(
-                                                text: 'Ano/Sem: ',
+                                                text: 'Ano: ',
                                                 style: TextStyle(
                                                   color: Colors.blue[900],
                                                 )),
                                             TextSpan(
-                                                text: '2023/1',
+                                                text: model.userMain.getAno(),
                                                 style: TextStyle(
                                                   color: Colors.yellow[700],
                                                 )),
@@ -298,7 +298,7 @@ class _AbaHomeState extends State<AbaHome> {
                                     padding: const EdgeInsets.only(left: 5),
                                     child: Container(
                                       width: MediaQuery.of(context).size.width -
-                                          405,
+                                          355,
                                       height: 30,
                                       padding: const EdgeInsets.all(5),
                                       decoration: BoxDecoration(
@@ -320,12 +320,13 @@ class _AbaHomeState extends State<AbaHome> {
                                               ),
                                               children: [
                                                 TextSpan(
-                                                    text: 'Etapa: ',
+                                                    text: 'Semestre: ',
                                                     style: TextStyle(
                                                       color: Colors.blue[900],
                                                     )),
                                                 TextSpan(
-                                                    text: '7',
+                                                    text:
+                                                        'model.userMain.getSemestre()',
                                                     style: TextStyle(
                                                       color: Colors.yellow[700],
                                                     )),
@@ -351,26 +352,25 @@ class _AbaHomeState extends State<AbaHome> {
                                         borderRadius: BorderRadius.circular(10),
                                         color: Colors.white,
                                       ),
-                                      child: Center(
-                                        child: RichText(
-                                          text: TextSpan(
-                                              style: const TextStyle(
-                                                fontFamily: 'upheavtt',
-                                                fontSize: 16,
-                                              ),
-                                              children: [
-                                                TextSpan(
-                                                    text: 'Curr: ',
-                                                    style: TextStyle(
-                                                      color: Colors.blue[900],
-                                                    )),
-                                                TextSpan(
-                                                    text: '1234',
-                                                    style: TextStyle(
-                                                      color: Colors.yellow[700],
-                                                    )),
-                                              ]),
-                                        ),
+                                      child: RichText(
+                                        text: TextSpan(
+                                            style: const TextStyle(
+                                              fontFamily: 'upheavtt',
+                                              fontSize: 16,
+                                            ),
+                                            children: [
+                                              TextSpan(
+                                                  text: 'Etapa: ',
+                                                  style: TextStyle(
+                                                    color: Colors.blue[900],
+                                                  )),
+                                              TextSpan(
+                                                  text:
+                                                      model.userMain.getEtapa(),
+                                                  style: TextStyle(
+                                                    color: Colors.yellow[700],
+                                                  )),
+                                            ]),
                                       ),
                                     ),
                                   ),
