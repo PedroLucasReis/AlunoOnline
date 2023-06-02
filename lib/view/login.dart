@@ -161,6 +161,7 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 20),
                                 child: TextField(
+                                  controller: _passcontroller,
                                   textAlignVertical: TextAlignVertical.center,
                                   decoration: InputDecoration(
                                       fillColor: Colors.blue,

@@ -15,13 +15,13 @@ class StartPage extends StatefulWidget {
 }
 
 class _StartPageState extends State<StartPage> {
-  late Future load;
+  late VoidCallback load;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      tela2();
+      logedtest();
     });
   }
 
@@ -30,7 +30,6 @@ class _StartPageState extends State<StartPage> {
     return Scaffold(
       body: ScopedModelDescendant<UserController>(
           builder: (context, child, model) {
-        load = model.loadCurrentUser();
         return Center(
           child: Column(children: [
             Padding(
@@ -78,10 +77,11 @@ class _StartPageState extends State<StartPage> {
     );
   }
 
-  Future<void> tela2() async {
+  Future<void> logedtest() async {
+    var model = ScopedModel.of<UserController>(context);
     User? loged = FirebaseAuth.instance.currentUser;
     if (loged != null) {
-      await load;
+      await model.loadCurrentUser();
       Future.delayed(const Duration(seconds: 2), () {
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) {

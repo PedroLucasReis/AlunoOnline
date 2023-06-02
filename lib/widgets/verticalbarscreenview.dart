@@ -9,6 +9,7 @@ class VerticalBarScreenView extends StatefulWidget {
   final VoidCallback page5;
   final VoidCallback page6;
   final VoidCallback page7;
+  final VoidCallback logout;
 
   const VerticalBarScreenView(
       {super.key,
@@ -19,7 +20,8 @@ class VerticalBarScreenView extends StatefulWidget {
       required this.page4,
       required this.page5,
       required this.page6,
-      required this.page7});
+      required this.page7,
+      required this.logout});
 
   @override
   State<VerticalBarScreenView> createState() => _VerticalBarScreenViewState();
@@ -103,6 +105,13 @@ class _VerticalBarScreenViewState extends State<VerticalBarScreenView> {
                 widget.page7();
               },
               icon: const Icon(Icons.info_rounded,
+                  color: Color.fromARGB(255, 13, 71, 161))),
+          IconButton(
+              tooltip: 'Sair',
+              onPressed: () {
+                widget.logout();
+              },
+              icon: const Icon(Icons.logout_rounded,
                   color: Color.fromARGB(255, 13, 71, 161)))
         ],
       ),

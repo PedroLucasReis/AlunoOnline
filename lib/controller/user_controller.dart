@@ -11,18 +11,6 @@ class UserController extends Model {
   bool isLoading = false;
   final UserModel userMain = UserModel();
 
-  UserController() {
-    User? loged = FirebaseAuth.instance.currentUser;
-    if (loged != null) {
-      try {
-        loadCurrentUser();
-      } catch (e) {
-        userMain.setName('Desconhecido');
-        userMain.setCode('000000');
-      }
-    }
-  }
-
   Future<void> signUp(
       {required String name,
       required String code,
@@ -89,11 +77,11 @@ class UserController extends Model {
     } else {
       try {
         await FirebaseAuth.instance
-            .signInWithEmailAndPassword(email: email, password: pass)
-            .then((value) {
-          loadCurrentUser();
-          onSuccess();
-        });
+            .signInWithEmailAndPassword(email: email, password: pass);
+
+        loadCurrentUser();
+
+        onSuccess();
       } catch (e) {
         // Ocorreu um erro durante o login
         if (e is FirebaseAuthException) {
@@ -104,7 +92,6 @@ class UserController extends Model {
             wrongpass();
           } else {
             unknownerror();
-            print(e);
           }
         } else {
           // Lidar com outros erros
@@ -133,8 +120,8 @@ class UserController extends Model {
         userMain.setAll({'name': name, 'code': code});
         await FirebaseFirestore.instance
             .collection("users")
-            .doc(user.uid)
-            .set(userMain.getAll());
+            .add({"uid": user.uid, "name": name, "code": code});
+
         if (onSuccess != null) {
           onSuccess();
         }
@@ -151,14 +138,20 @@ class UserController extends Model {
   Future<void> loadCurrentUser() async {
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
-      DocumentSnapshot docUser = await FirebaseFirestore.instance
-          .collection("users")
-          .doc(user.uid)
-          .get(const GetOptions());
-      userMain.setAll({
-        "name": docUser.get("name"),
-        "email": docUser.get("email"),
-      });
+      try {
+        QuerySnapshot docUser = await FirebaseFirestore.instance
+            .collection("users")
+            .where('uid', isEqualTo: user.uid)
+            .get(const GetOptions());
+
+        userMain.setAll({
+          "name": docUser.docs[0].get('name'),
+          "code": docUser.docs[0].get('code'),
+        });
+      } catch (e) {
+        print(e);
+        print(user.uid.toString());
+      }
     }
     isLoading = false;
     notifyListeners();
@@ -167,7 +160,6 @@ class UserController extends Model {
   void logout() {
     FirebaseAuth.instance.signOut();
     userMain.setAll({});
-    notifyListeners();
   }
 
   String? userUid() {
