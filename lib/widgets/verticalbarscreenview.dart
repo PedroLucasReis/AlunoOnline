@@ -57,12 +57,12 @@ class _VerticalBarScreenViewState extends State<VerticalBarScreenView> {
               icon: const Icon(Icons.person_rounded,
                   color: Color.fromARGB(255, 13, 71, 161))),
           IconButton(
-              tooltip: 'Boletim',
+              tooltip: 'Requerimentos',
               onPressed: () {
                 widget.page2();
               },
               icon: const Icon(
-                Icons.local_play_rounded,
+                Icons.assignment_late_rounded,
                 color: Color.fromARGB(255, 13, 71, 161),
               )),
           IconButton(

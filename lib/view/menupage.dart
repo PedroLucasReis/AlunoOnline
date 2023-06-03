@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:animate_gradient/animate_gradient.dart';
 import 'package:myproject/view/login.dart';
 
-import 'package:myproject/view/menuabas/abaclasses.dart';
+import 'package:myproject/view/menuabas/abaalerts.dart';
 import 'package:myproject/view/menuabas/abanotify.dart';
 
 import 'package:myproject/widgets/verticalbarscreenview.dart';
@@ -73,7 +73,7 @@ class _MenuPageState extends State<MenuPage>
                         children: const [
                           AbaHome(),
                           AbaProfile(),
-                          AbaClasses(),
+                          AbaAlerts(),
                           AbaNotify(),
                           AbaInfo(),
                         ],

@@ -1,7 +1,6 @@
 // ignore_for_file: depend_on_referenced_packages
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/services.dart';
 import 'package:myproject/controller/system_controller.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +9,8 @@ import '../model/users.dart';
 class UserController extends Model {
   bool isLoading = false;
   final UserModel userMain = UserModel();
-  List<Widget> segunda = [];
+  List<QueryDocumentSnapshot<Object?>> docs = [];
+  int num = 0;
 
   Future<void> signUp(
       {required String name,
@@ -259,28 +259,155 @@ class UserController extends Model {
     }
   }
 
-  Future<void> loadClassesList() async {
+  Future<void> loadRequerList() async {
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       try {
         QuerySnapshot docUser = await FirebaseFirestore.instance
-            .collection("classes")
+            .collection("requer")
             .where('uid', isEqualTo: user.uid)
-            .where('day', isEqualTo: 'seg')
-            .orderBy('time')
+            .orderBy('num', descending: false)
             .get(const GetOptions());
-        for (QueryDocumentSnapshot<Object?> doc in docUser.docs) {
-          segunda.add(ListTile(
-            title: doc.get('title'),
-            leading: IconButton(
-                onPressed: () {}, icon: Icon(Icons.edit_note_rounded)),
-          ));
-        }
-      } catch (e) {}
-      try {} catch (e) {}
+        docs = docUser.docs;
+        num = docs.length;
+      } catch (e) {
+        print(e);
+      }
 
       isLoading = false;
       notifyListeners();
+    }
+  }
+
+  Future<void> saveRequer({
+    String title = '...',
+    String descrip = '...',
+    VoidCallback? onSuccess,
+    VoidCallback? onFail,
+  }) async {
+    isLoading = true;
+    notifyListeners();
+    num++;
+    User? user = FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      try {
+        await FirebaseFirestore.instance.collection("requer").add({
+          "uid": user.uid,
+          "title": title,
+          "descrip": descrip,
+          'num': num,
+        });
+        loadRequerList();
+        if (onSuccess != null) {
+          onSuccess();
+        }
+      } catch (e) {
+        if (onFail != null) {
+          onFail();
+        }
+      }
+    }
+    isLoading = false;
+    notifyListeners();
+  }
+
+  Future<void> deleteRequer({
+    required String id,
+    VoidCallback? onSuccess,
+    VoidCallback? onFail,
+  }) async {
+    isLoading = true;
+    notifyListeners();
+
+    User? user = FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      try {
+        await FirebaseFirestore.instance.collection("requer").doc(id).delete();
+        loadRequerList();
+        if (onSuccess != null) {
+          onSuccess();
+        }
+      } catch (e) {
+        print(e);
+      }
+    }
+    isLoading = false;
+    notifyListeners();
+  }
+
+  Future<void> editRequer({
+    required String title,
+    required String descrip,
+    required String id,
+    required int num0,
+    VoidCallback? onSuccess,
+    VoidCallback? onFail,
+  }) async {
+    isLoading = true;
+    notifyListeners();
+
+    User? user = FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      try {
+        await FirebaseFirestore.instance.collection("requer").doc(id).update({
+          "uid": user.uid,
+          "title": title,
+          "descrip": descrip,
+          'num': num0,
+        });
+        loadRequerList();
+        if (onSuccess != null) {
+          onSuccess();
+        }
+      } catch (e) {
+        if (onFail != null) {
+          onFail();
+        }
+      }
+    }
+    isLoading = false;
+    notifyListeners();
+  }
+
+  Future<void> saveAlerts({
+    required String title,
+    required String mes,
+    VoidCallback? onSuccess,
+    VoidCallback? onFail,
+  }) async {
+    User? user = FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      try {
+        await FirebaseFirestore.instance.collection("alerts").add({
+          "name": userMain.getName(),
+          "title": title,
+          "mes": mes,
+        });
+      } catch (e) {}
+    }
+  }
+
+  Future<void> editAlerts({
+    required String title,
+    required String mes,
+    required String id,
+    VoidCallback? onSuccess,
+    VoidCallback? onFail,
+  }) async {
+    User? user = FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      try {
+        await FirebaseFirestore.instance.collection("alerts").doc(id).update({
+          "name": userMain.getName(),
+          "title": title,
+          "mes": mes,
+        });
+      } catch (e) {}
     }
   }
 }

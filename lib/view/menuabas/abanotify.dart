@@ -1,6 +1,9 @@
-import 'dart:async';
+// ignore_for_file: depend_on_referenced_packages
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
+import '../../controller/user_controller.dart';
 
 class AbaNotify extends StatefulWidget {
   const AbaNotify({super.key});
@@ -10,322 +13,513 @@ class AbaNotify extends StatefulWidget {
 }
 
 class _AbaNotifyState extends State<AbaNotify> {
-  final _controller = ScrollController();
-  final _listKey = GlobalKey();
-  late Timer _timer;
+  late TextEditingController _titlecontroller;
+  late TextEditingController _mescontroller;
 
   @override
   void initState() {
     super.initState();
-    _timer = Timer.periodic(const Duration(seconds: 4), (timer) {
-      final position = _controller.position;
-      final maxScrollExtent = position.maxScrollExtent;
-      final currentScroll = position.pixels;
 
-      if (currentScroll >= maxScrollExtent) {
-        _controller.animateTo(
-          0.0,
-          duration: const Duration(seconds: 3),
-          curve: Curves.easeOut,
-        );
-      } else {
-        _controller.animateTo(
-          maxScrollExtent,
-          duration: const Duration(seconds: 3),
-          curve: Curves.easeOut,
-        );
-      }
-    });
+    _titlecontroller = TextEditingController();
+    _mescontroller = TextEditingController();
   }
 
   @override
   void dispose() {
-    _timer.cancel();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              width: MediaQuery.of(context).size.width - 80,
-              height: 30,
-              padding: const EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.blue),
-                boxShadow: const [
-                  BoxShadow(color: Colors.blue, offset: Offset(5, 5))
+        backgroundColor: Colors.transparent,
+        body: ScopedModelDescendant<UserController>(
+            builder: (context, child, model) {
+          return SingleChildScrollView(
+              child: Column(
+            children: [
+              Row(
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width - 115,
+                    height: 30,
+                    padding: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.blue),
+                      boxShadow: const [
+                        BoxShadow(color: Colors.blue, offset: Offset(5, 5))
+                      ],
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white,
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Avisos',
+                        style: TextStyle(
+                            fontFamily: 'upheavtt',
+                            color: Colors.blue[900],
+                            fontSize: 16),
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                      onPressed: () {
+                        setState(() {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return SimpleDialog(
+                                  title: const Text('Abrir requerimento:'),
+                                  titleTextStyle: TextStyle(
+                                      fontFamily: 'upheavtt',
+                                      color: Colors.blue[900],
+                                      fontSize: 16),
+                                  backgroundColor: Colors.white,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 24),
+                                      child: Text(
+                                        'Titulo:',
+                                        style: TextStyle(
+                                            fontFamily: 'upheavtt',
+                                            color: Colors.blue[900],
+                                            fontSize: 16),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 24, vertical: 10),
+                                      child: TextField(
+                                        controller: _titlecontroller,
+                                        textAlignVertical:
+                                            TextAlignVertical.center,
+                                        keyboardType: TextInputType.number,
+                                        decoration: InputDecoration(
+                                            fillColor: Colors.blue,
+                                            enabledBorder:
+                                                const OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                        color: Colors.blue)),
+                                            suffixIcon:
+                                                const Icon(Icons.email_rounded),
+                                            suffixIconColor: Colors.blue[900]),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 24),
+                                      child: Text(
+                                        'Mensagem:',
+                                        style: TextStyle(
+                                            fontFamily: 'upheavtt',
+                                            color: Colors.blue[900],
+                                            fontSize: 16),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 24, vertical: 10),
+                                      child: SizedBox(
+                                        height: 100,
+                                        width: 100,
+                                        child: TextField(
+                                          minLines: 5,
+                                          maxLines: 5,
+                                          controller: _mescontroller,
+                                          textAlignVertical:
+                                              TextAlignVertical.center,
+                                          decoration: const InputDecoration(
+                                            fillColor: Colors.blue,
+                                            enabledBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    color: Colors.blue)),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SimpleDialogOption(
+                                      child: Text(
+                                        'Salvar',
+                                        style: TextStyle(
+                                            fontFamily: 'upheavtt',
+                                            color: Colors.blue[900],
+                                            shadows: const [
+                                              Shadow(
+                                                  color: Colors.blue,
+                                                  offset: Offset(1, 1),
+                                                  blurRadius: 1)
+                                            ],
+                                            fontSize: 16),
+                                      ),
+                                      onPressed: () {
+                                        if (_titlecontroller.text.isEmpty) {
+                                          Navigator.pop(context);
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              shape:
+                                                  const RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  5)),
+                                                      side: BorderSide(
+                                                        color: Color.fromARGB(
+                                                            255, 13, 71, 161),
+                                                      )),
+                                              content: Text(
+                                                'O Titulo não pode ser vazio!',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  color: Colors.blue[900],
+                                                  fontFamily: "upheavtt",
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              backgroundColor: Colors.white,
+                                              behavior:
+                                                  SnackBarBehavior.floating,
+                                              clipBehavior: Clip.antiAlias,
+                                            ),
+                                          );
+                                        } else if (_mescontroller
+                                            .text.isEmpty) {
+                                          Navigator.pop(context);
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              shape:
+                                                  const RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  5)),
+                                                      side: BorderSide(
+                                                        color: Color.fromARGB(
+                                                            255, 13, 71, 161),
+                                                      )),
+                                              content: Text(
+                                                'A mensagem não pode ser vazia!',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  color: Colors.blue[900],
+                                                  fontFamily: "upheavtt",
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              backgroundColor: Colors.white,
+                                              behavior:
+                                                  SnackBarBehavior.floating,
+                                              clipBehavior: Clip.antiAlias,
+                                            ),
+                                          );
+                                        } else {
+                                          model.saveAlerts(
+                                              title: _titlecontroller.text,
+                                              mes: _mescontroller.text);
+                                          Navigator.pop(context);
+                                        }
+                                      },
+                                    )
+                                  ],
+                                );
+                              });
+                        });
+                      },
+                      icon: const Icon(
+                        Icons.add_box_rounded,
+                        size: 30,
+                        color: Colors.white,
+                        shadows: [Shadow(color: Colors.blue, blurRadius: 6)],
+                      ))
                 ],
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.white,
               ),
-              child: Center(
-                child: Text(
-                  'Avisos',
-                  style: TextStyle(
-                      fontFamily: 'upheavtt',
-                      color: Colors.blue[900],
-                      fontSize: 16),
+              Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: Container(
+                  width: MediaQuery.of(context).size.width - 80,
+                  height: 500,
+                  padding: const EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.blue),
+                    boxShadow: const [
+                      BoxShadow(color: Colors.blue, offset: Offset(5, 5))
+                    ],
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                  ),
+                  child: StreamBuilder<QuerySnapshot>(
+                    stream: FirebaseFirestore.instance
+                        .collection('alerts')
+                        .snapshots(),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<QuerySnapshot> snapshot) {
+                      if (snapshot.hasError) {
+                        return Text(
+                            'Erro ao carregar dados: ${snapshot.error}');
+                      } else if (snapshot.connectionState ==
+                          ConnectionState.waiting) {
+                        return const Text('Carregando...');
+                      } else {
+                        QuerySnapshot<Object?>? data = snapshot.data;
+                        if (data != null) {
+                          return ListView(
+                            children:
+                                data.docs.map((DocumentSnapshot document) {
+                              String id = document.id;
+                              return ListTile(
+                                  title: Text(
+                                    document['title'].toString(),
+                                    style: TextStyle(
+                                        fontFamily: 'upheavtt',
+                                        color: Colors.yellow[900],
+                                        fontSize: 20),
+                                  ),
+                                  subtitle: Text(
+                                    document['mes'].toString(),
+                                    style: TextStyle(
+                                        fontFamily: 'upheavtt',
+                                        color: Colors.blue[900],
+                                        fontSize: 16),
+                                  ),
+                                  trailing: Text(
+                                    document['name'].toString(),
+                                    style: TextStyle(
+                                        fontFamily: 'upheavtt',
+                                        color: Colors.blue[900],
+                                        fontSize: 16),
+                                  ),
+                                  onTap: () {
+                                    setState(() {
+                                      showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return SimpleDialog(
+                                              title:
+                                                  const Text('Editar Aviso:'),
+                                              titleTextStyle: TextStyle(
+                                                  fontFamily: 'upheavtt',
+                                                  color: Colors.blue[900],
+                                                  fontSize: 16),
+                                              backgroundColor: Colors.white,
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
+                                                      horizontal: 24),
+                                                  child: Text(
+                                                    'Titulo:',
+                                                    style: TextStyle(
+                                                        fontFamily: 'upheavtt',
+                                                        color: Colors.blue[900],
+                                                        fontSize: 16),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
+                                                      horizontal: 24,
+                                                      vertical: 10),
+                                                  child: TextField(
+                                                    controller:
+                                                        _titlecontroller,
+                                                    textAlignVertical:
+                                                        TextAlignVertical
+                                                            .center,
+                                                    keyboardType:
+                                                        TextInputType.number,
+                                                    decoration: InputDecoration(
+                                                        fillColor: Colors.blue,
+                                                        enabledBorder:
+                                                            const OutlineInputBorder(
+                                                                borderSide: BorderSide(
+                                                                    color: Colors
+                                                                        .blue)),
+                                                        suffixIcon: const Icon(
+                                                            Icons
+                                                                .email_rounded),
+                                                        suffixIconColor:
+                                                            Colors.blue[900]),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
+                                                      horizontal: 24),
+                                                  child: Text(
+                                                    'Mensagem:',
+                                                    style: TextStyle(
+                                                        fontFamily: 'upheavtt',
+                                                        color: Colors.blue[900],
+                                                        fontSize: 16),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
+                                                      horizontal: 24,
+                                                      vertical: 10),
+                                                  child: SizedBox(
+                                                    height: 100,
+                                                    width: 100,
+                                                    child: TextField(
+                                                      minLines: 5,
+                                                      maxLines: 5,
+                                                      controller:
+                                                          _mescontroller,
+                                                      textAlignVertical:
+                                                          TextAlignVertical
+                                                              .center,
+                                                      decoration:
+                                                          const InputDecoration(
+                                                        fillColor: Colors.blue,
+                                                        enabledBorder:
+                                                            OutlineInputBorder(
+                                                                borderSide: BorderSide(
+                                                                    color: Colors
+                                                                        .blue)),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                SimpleDialogOption(
+                                                  child: Text(
+                                                    'Salvar',
+                                                    style: TextStyle(
+                                                        fontFamily: 'upheavtt',
+                                                        color: Colors.blue[900],
+                                                        shadows: const [
+                                                          Shadow(
+                                                              color:
+                                                                  Colors.blue,
+                                                              offset:
+                                                                  Offset(1, 1),
+                                                              blurRadius: 1)
+                                                        ],
+                                                        fontSize: 16),
+                                                  ),
+                                                  onPressed: () {
+                                                    if (_titlecontroller
+                                                        .text.isEmpty) {
+                                                      Navigator.pop(context);
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(
+                                                        SnackBar(
+                                                          shape:
+                                                              const RoundedRectangleBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius.all(
+                                                                          Radius.circular(
+                                                                              5)),
+                                                                  side:
+                                                                      BorderSide(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            13,
+                                                                            71,
+                                                                            161),
+                                                                  )),
+                                                          content: Text(
+                                                            'O Titulo não pode ser vazio!',
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            style: TextStyle(
+                                                              color: Colors
+                                                                  .blue[900],
+                                                              fontFamily:
+                                                                  "upheavtt",
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                            ),
+                                                          ),
+                                                          backgroundColor:
+                                                              Colors.white,
+                                                          behavior:
+                                                              SnackBarBehavior
+                                                                  .floating,
+                                                          clipBehavior:
+                                                              Clip.antiAlias,
+                                                        ),
+                                                      );
+                                                    } else if (_mescontroller
+                                                        .text.isEmpty) {
+                                                      Navigator.pop(context);
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(
+                                                        SnackBar(
+                                                          shape:
+                                                              const RoundedRectangleBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius.all(
+                                                                          Radius.circular(
+                                                                              5)),
+                                                                  side:
+                                                                      BorderSide(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            13,
+                                                                            71,
+                                                                            161),
+                                                                  )),
+                                                          content: Text(
+                                                            'A Mensagem não pode ser vazia!',
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            style: TextStyle(
+                                                              color: Colors
+                                                                  .blue[900],
+                                                              fontFamily:
+                                                                  "upheavtt",
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                            ),
+                                                          ),
+                                                          backgroundColor:
+                                                              Colors.white,
+                                                          behavior:
+                                                              SnackBarBehavior
+                                                                  .floating,
+                                                          clipBehavior:
+                                                              Clip.antiAlias,
+                                                        ),
+                                                      );
+                                                    } else {
+                                                      model.editAlerts(
+                                                        title: _titlecontroller
+                                                            .text,
+                                                        mes:
+                                                            _mescontroller.text,
+                                                        id: id,
+                                                      );
+
+                                                      Navigator.pop(context);
+                                                    }
+                                                  },
+                                                )
+                                              ],
+                                            );
+                                          });
+                                    });
+                                  });
+                            }).toList(),
+                          );
+                        } else {
+                          return ListView();
+                        }
+                      }
+                    },
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: Container(
-                width: MediaQuery.of(context).size.width - 80,
-                height: 500,
-                padding: const EdgeInsets.all(5),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.blue),
-                  boxShadow: const [
-                    BoxShadow(color: Colors.blue, offset: Offset(5, 5))
-                  ],
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.white,
-                ),
-                child: ListView(
-                  key: _listKey,
-                  controller: _controller,
-                  children: [
-                    ListTile(
-                      title: const Text(
-                        'Oportunidade de estagio',
-                      ),
-                      subtitle: const Text('Unaerp - Lecograf Unaerp'),
-                      trailing: const Text('20/04/2023'),
-                      titleTextStyle: TextStyle(
-                          fontFamily: 'upheavtt',
-                          color: Colors.blue[900],
-                          fontSize: 16),
-                      subtitleTextStyle:
-                          const TextStyle(fontFamily: 'upheavtt', fontSize: 12),
-                      leadingAndTrailingTextStyle: TextStyle(
-                          fontFamily: 'upheavtt',
-                          color: Colors.yellow[800],
-                          fontSize: 16),
-                    ),
-                    ListTile(
-                      title: const Text(
-                        '8° semana de engenharia',
-                      ),
-                      subtitle: const Text('Inscreva-se'),
-                      trailing: const Text('19/04/2023'),
-                      titleTextStyle: TextStyle(
-                          fontFamily: 'upheavtt',
-                          color: Colors.blue[900],
-                          fontSize: 16),
-                      subtitleTextStyle:
-                          const TextStyle(fontFamily: 'upheavtt', fontSize: 12),
-                      leadingAndTrailingTextStyle: TextStyle(
-                          fontFamily: 'upheavtt',
-                          color: Colors.yellow[800],
-                          fontSize: 16),
-                    ),
-                    ListTile(
-                      title: const Text(
-                        'Dica de segurança da CIPA',
-                      ),
-                      subtitle: const Text(
-                          'Não utilize o celular nas escadas, use o corrimão'),
-                      trailing: const Text('18/04/2023'),
-                      titleTextStyle: TextStyle(
-                          fontFamily: 'upheavtt',
-                          color: Colors.blue[900],
-                          fontSize: 16),
-                      subtitleTextStyle:
-                          const TextStyle(fontFamily: 'upheavtt', fontSize: 12),
-                      leadingAndTrailingTextStyle: TextStyle(
-                          fontFamily: 'upheavtt',
-                          color: Colors.yellow[800],
-                          fontSize: 16),
-                    ),
-                    ListTile(
-                      title: const Text(
-                        'Evento Aquathlon 2023',
-                      ),
-                      subtitle: const Text(
-                          'São 3 categorias e kit personalizado da prova'),
-                      trailing: const Text('17/04/2023'),
-                      titleTextStyle: TextStyle(
-                          fontFamily: 'upheavtt',
-                          color: Colors.blue[900],
-                          fontSize: 16),
-                      subtitleTextStyle:
-                          const TextStyle(fontFamily: 'upheavtt', fontSize: 12),
-                      leadingAndTrailingTextStyle: TextStyle(
-                          fontFamily: 'upheavtt',
-                          color: Colors.yellow[800],
-                          fontSize: 16),
-                    ),
-                    ListTile(
-                      title: const Text(
-                        'JOGOS',
-                      ),
-                      subtitle: const Text(
-                          'jogos na semana de engenharia e tecnologia'),
-                      trailing: const Text('17/04/2023'),
-                      titleTextStyle: TextStyle(
-                          fontFamily: 'upheavtt',
-                          color: Colors.blue[900],
-                          fontSize: 16),
-                      subtitleTextStyle:
-                          const TextStyle(fontFamily: 'upheavtt', fontSize: 12),
-                      leadingAndTrailingTextStyle: TextStyle(
-                          fontFamily: 'upheavtt',
-                          color: Colors.yellow[800],
-                          fontSize: 16),
-                    ),
-                    ListTile(
-                      title: const Text(
-                        'Monitoria',
-                      ),
-                      subtitle: const Text('Vagas abertas!'),
-                      trailing: const Text('12/04/2023'),
-                      titleTextStyle: TextStyle(
-                          fontFamily: 'upheavtt',
-                          color: Colors.blue[900],
-                          fontSize: 16),
-                      subtitleTextStyle:
-                          const TextStyle(fontFamily: 'upheavtt', fontSize: 12),
-                      leadingAndTrailingTextStyle: TextStyle(
-                          fontFamily: 'upheavtt',
-                          color: Colors.yellow[800],
-                          fontSize: 16),
-                    ),
-                    ListTile(
-                      title: const Text(
-                        'O poder da transformação',
-                      ),
-                      subtitle: const Text(
-                          'Palestra com ex-ginasta Lais Souza (palestra gratuita)'),
-                      trailing: const Text('11/04/2023'),
-                      titleTextStyle: TextStyle(
-                          fontFamily: 'upheavtt',
-                          color: Colors.blue[900],
-                          fontSize: 16),
-                      subtitleTextStyle:
-                          const TextStyle(fontFamily: 'upheavtt', fontSize: 12),
-                      leadingAndTrailingTextStyle: TextStyle(
-                          fontFamily: 'upheavtt',
-                          color: Colors.yellow[800],
-                          fontSize: 16),
-                    ),
-                    ListTile(
-                      title: const Text(
-                        'Apoio aos estudantes',
-                      ),
-                      subtitle: const Text(
-                          'Unaerp retoma realização de rodas de conversa'),
-                      trailing: const Text('04/04/2023'),
-                      titleTextStyle: TextStyle(
-                          fontFamily: 'upheavtt',
-                          color: Colors.blue[900],
-                          fontSize: 16),
-                      subtitleTextStyle:
-                          const TextStyle(fontFamily: 'upheavtt', fontSize: 12),
-                      leadingAndTrailingTextStyle: TextStyle(
-                          fontFamily: 'upheavtt',
-                          color: Colors.yellow[800],
-                          fontSize: 16),
-                    ),
-                    ListTile(
-                      title: const Text(
-                        'Edital pibic 2023',
-                      ),
-                      subtitle: const Text('Resultado para bolsas voluntárias'),
-                      trailing: const Text('31/03/2023'),
-                      titleTextStyle: TextStyle(
-                          fontFamily: 'upheavtt',
-                          color: Colors.blue[900],
-                          fontSize: 16),
-                      subtitleTextStyle:
-                          const TextStyle(fontFamily: 'upheavtt', fontSize: 12),
-                      leadingAndTrailingTextStyle: TextStyle(
-                          fontFamily: 'upheavtt',
-                          color: Colors.yellow[800],
-                          fontSize: 16),
-                    ),
-                    ListTile(
-                      title: const Text(
-                        'Mostra de poemas',
-                      ),
-                      subtitle: const Text('Inscrições até o dia 15 de maio'),
-                      trailing: const Text('29/03/2023'),
-                      titleTextStyle: TextStyle(
-                          fontFamily: 'upheavtt',
-                          color: Colors.blue[900],
-                          fontSize: 16),
-                      subtitleTextStyle:
-                          const TextStyle(fontFamily: 'upheavtt', fontSize: 12),
-                      leadingAndTrailingTextStyle: TextStyle(
-                          fontFamily: 'upheavtt',
-                          color: Colors.yellow[800],
-                          fontSize: 16),
-                    ),
-                    ListTile(
-                      title: const Text(
-                        'Grupo vocal Universitário',
-                      ),
-                      subtitle: const Text(
-                          'inscreva-se e agende aulas de orientação vocal'),
-                      trailing: const Text('21/04/2023'),
-                      titleTextStyle: TextStyle(
-                          fontFamily: 'upheavtt',
-                          color: Colors.blue[900],
-                          fontSize: 16),
-                      subtitleTextStyle:
-                          const TextStyle(fontFamily: 'upheavtt', fontSize: 12),
-                      leadingAndTrailingTextStyle: TextStyle(
-                          fontFamily: 'upheavtt',
-                          color: Colors.yellow[800],
-                          fontSize: 16),
-                    ),
-                    ListTile(
-                      title: const Text(
-                        'Atendimento médico',
-                      ),
-                      subtitle: const Text(
-                          'Casos de urgência e emergência ocorridos no campus'),
-                      trailing: const Text('23/02/2023'),
-                      titleTextStyle: TextStyle(
-                          fontFamily: 'upheavtt',
-                          color: Colors.blue[900],
-                          fontSize: 16),
-                      subtitleTextStyle:
-                          const TextStyle(fontFamily: 'upheavtt', fontSize: 12),
-                      leadingAndTrailingTextStyle: TextStyle(
-                          fontFamily: 'upheavtt',
-                          color: Colors.yellow[800],
-                          fontSize: 16),
-                    ),
-                    ListTile(
-                      title: const Text(
-                        '15° Desafio - Domótica',
-                      ),
-                      subtitle: const Text('Engenharia da computação'),
-                      trailing: const Text('16/02/2023'),
-                      titleTextStyle: TextStyle(
-                          fontFamily: 'upheavtt',
-                          color: Colors.blue[900],
-                          fontSize: 16),
-                      subtitleTextStyle:
-                          const TextStyle(fontFamily: 'upheavtt', fontSize: 12),
-                      leadingAndTrailingTextStyle: TextStyle(
-                          fontFamily: 'upheavtt',
-                          color: Colors.yellow[800],
-                          fontSize: 16),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+            ],
+          ));
+        }));
   }
 }

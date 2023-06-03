@@ -82,6 +82,7 @@ class _StartPageState extends State<StartPage> {
     User? loged = FirebaseAuth.instance.currentUser;
     if (loged != null) {
       await model.loadCurrentUser();
+      await model.loadRequerList();
       Future.delayed(const Duration(seconds: 2), () {
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) {
