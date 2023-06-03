@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:animate_gradient/animate_gradient.dart';
 import 'package:myproject/view/login.dart';
 
-import 'package:myproject/view/menuabas/abanotes.dart';
+import 'package:myproject/view/menuabas/abaclasses.dart';
 import 'package:myproject/view/menuabas/abanotify.dart';
-import 'package:myproject/view/menuabas/abaprofile.dart';
 
 import 'package:myproject/widgets/verticalbarscreenview.dart';
 import 'package:myproject/view/menuabas/abahome.dart';
@@ -14,6 +13,7 @@ import 'package:myproject/view/menuabas/abainfo.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../controller/user_controller.dart';
+import 'menuabas/abaprofile.dart';
 
 class MenuPage extends StatefulWidget {
   const MenuPage({super.key});
@@ -73,7 +73,7 @@ class _MenuPageState extends State<MenuPage>
                         children: const [
                           AbaHome(),
                           AbaProfile(),
-                          AbaNotes(),
+                          AbaClasses(),
                           AbaNotify(),
                           AbaInfo(),
                         ],

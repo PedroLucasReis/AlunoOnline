@@ -171,7 +171,7 @@ class _AbaHomeState extends State<AbaHome> {
                     padding: const EdgeInsets.only(top: 10),
                     child: Container(
                         width: MediaQuery.of(context).size.width - 80,
-                        height: 205,
+                        height: 160,
                         padding: const EdgeInsets.all(15),
                         decoration: BoxDecoration(
                           border: Border.all(color: Colors.blue),
@@ -208,50 +208,10 @@ class _AbaHomeState extends State<AbaHome> {
                                             color: Colors.blue[900],
                                           )),
                                       TextSpan(
-                                          text: 'Engenharia da computação',
+                                          text: model.userMain.getSubj(),
                                           style: TextStyle(
                                               color: Colors.yellow[700])),
                                     ]),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 15),
-                              child: Container(
-                                width: MediaQuery.of(context).size.width - 125,
-                                height: 30,
-                                padding: const EdgeInsets.all(5),
-                                decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.blue),
-                                  boxShadow: const [
-                                    BoxShadow(
-                                        color: Colors.blue,
-                                        offset: Offset(5, 5))
-                                  ],
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.white,
-                                ),
-                                child: SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: RichText(
-                                    text: TextSpan(
-                                        style: const TextStyle(
-                                          fontFamily: 'upheavtt',
-                                          fontSize: 16,
-                                        ),
-                                        children: [
-                                          TextSpan(
-                                              text: 'Google Classroom: ',
-                                              style: TextStyle(
-                                                color: Colors.blue[900],
-                                              )),
-                                          TextSpan(
-                                              text: 'anonimo@sou.unaerp.edu.br',
-                                              style: TextStyle(
-                                                color: Colors.yellow[700],
-                                              )),
-                                        ]),
-                                  ),
-                                ),
                               ),
                             ),
                             Padding(
@@ -287,7 +247,7 @@ class _AbaHomeState extends State<AbaHome> {
                                                   color: Colors.blue[900],
                                                 )),
                                             TextSpan(
-                                                text: model.userMain.getAno(),
+                                                text: model.userMain.getYear(),
                                                 style: TextStyle(
                                                   color: Colors.yellow[700],
                                                 )),
@@ -311,27 +271,25 @@ class _AbaHomeState extends State<AbaHome> {
                                         borderRadius: BorderRadius.circular(10),
                                         color: Colors.white,
                                       ),
-                                      child: Center(
-                                        child: RichText(
-                                          text: TextSpan(
-                                              style: const TextStyle(
-                                                fontFamily: 'upheavtt',
-                                                fontSize: 16,
-                                              ),
-                                              children: [
-                                                TextSpan(
-                                                    text: 'Semestre: ',
-                                                    style: TextStyle(
-                                                      color: Colors.blue[900],
-                                                    )),
-                                                TextSpan(
-                                                    text:
-                                                        'model.userMain.getSemestre()',
-                                                    style: TextStyle(
-                                                      color: Colors.yellow[700],
-                                                    )),
-                                              ]),
-                                        ),
+                                      child: RichText(
+                                        text: TextSpan(
+                                            style: const TextStyle(
+                                              fontFamily: 'upheavtt',
+                                              fontSize: 16,
+                                            ),
+                                            children: [
+                                              TextSpan(
+                                                  text: 'Semestre: ',
+                                                  style: TextStyle(
+                                                    color: Colors.blue[900],
+                                                  )),
+                                              TextSpan(
+                                                  text:
+                                                      model.userMain.getSeme(),
+                                                  style: TextStyle(
+                                                    color: Colors.yellow[700],
+                                                  )),
+                                            ]),
                                       ),
                                     ),
                                   ),
@@ -366,7 +324,7 @@ class _AbaHomeState extends State<AbaHome> {
                                                   )),
                                               TextSpan(
                                                   text:
-                                                      model.userMain.getEtapa(),
+                                                      model.userMain.getEphoc(),
                                                   style: TextStyle(
                                                     color: Colors.yellow[700],
                                                   )),
@@ -406,7 +364,7 @@ class _AbaHomeState extends State<AbaHome> {
                                               color: Colors.blue[900],
                                             )),
                                         TextSpan(
-                                            text: 'Ribeirão Preto',
+                                            text: model.userMain.getColl(),
                                             style: TextStyle(
                                               color: Colors.yellow[700],
                                             )),

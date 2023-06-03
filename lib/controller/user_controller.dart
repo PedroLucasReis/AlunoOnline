@@ -10,6 +10,7 @@ import '../model/users.dart';
 class UserController extends Model {
   bool isLoading = false;
   final UserModel userMain = UserModel();
+  List<Widget> segunda = [];
 
   Future<void> signUp(
       {required String name,
@@ -34,7 +35,7 @@ class UserController extends Model {
       try {
         await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email, password: pass);
-        saveUserData(name: name, code: code);
+        saveUserDataFirst(name: name, code: code);
         onSuccess();
       } catch (e) {
         // Ocorreu um erro durante a criação do usuário
@@ -105,9 +106,14 @@ class UserController extends Model {
   }
 
   //Saves user data on Firebase database
-  Future<void> saveUserData({
-    String? name,
-    String? code,
+  Future<void> saveUserDataFirst({
+    String name = '...',
+    String code = '...',
+    String year = '...',
+    String seme = '...',
+    String ephoc = '...',
+    String subj = '...',
+    String coll = '...',
     VoidCallback? onSuccess,
     VoidCallback? onFail,
   }) async {
@@ -117,10 +123,82 @@ class UserController extends Model {
 
     if (user != null) {
       try {
-        userMain.setAll({'name': name, 'code': code});
+        userMain.setAll({
+          'name': name,
+          'code': code,
+          'year': year,
+          'seme': seme,
+          'ephoc': ephoc,
+          'subj': subj,
+          'coll': coll
+        });
+        await FirebaseFirestore.instance.collection("users").add({
+          "uid": user.uid,
+          "name": name,
+          "code": code,
+          'year': year,
+          'seme': seme,
+          'ephoc': ephoc,
+          'subj': subj,
+          'coll': coll
+        });
+
+        if (onSuccess != null) {
+          onSuccess();
+        }
+      } catch (e) {
+        if (onFail != null) {
+          onFail();
+        }
+      }
+    }
+    isLoading = false;
+    notifyListeners();
+  }
+
+  //Saves user data on Firebase database
+  Future<void> saveUserDataSecond({
+    String name = '...',
+    String code = '...',
+    String year = '...',
+    String seme = '...',
+    String ephoc = '...',
+    String subj = '...',
+    String coll = '...',
+    VoidCallback? onSuccess,
+    VoidCallback? onFail,
+  }) async {
+    isLoading = true;
+    notifyListeners();
+    User? user = FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      try {
+        userMain.setAll({
+          'name': name,
+          'code': code,
+          'year': year,
+          'seme': seme,
+          'ephoc': ephoc,
+          'subj': subj,
+          'coll': coll
+        });
+        String docId = '';
         await FirebaseFirestore.instance
             .collection("users")
-            .add({"uid": user.uid, "name": name, "code": code});
+            .where('uid', isEqualTo: user.uid)
+            .get(const GetOptions())
+            .then((value) => docId = value.docs[0].id);
+        await FirebaseFirestore.instance.collection("users").doc(docId).update({
+          "uid": user.uid,
+          "name": name,
+          "code": code,
+          'year': year,
+          'seme': seme,
+          'ephoc': ephoc,
+          'subj': subj,
+          'coll': coll
+        });
 
         if (onSuccess != null) {
           onSuccess();
@@ -147,6 +225,11 @@ class UserController extends Model {
         all.addAll({
           "name": docUser.docs[0].get('name'),
           "code": docUser.docs[0].get('code'),
+          "year": docUser.docs[0].get('year'),
+          "seme": docUser.docs[0].get('seme'),
+          "ephoc": docUser.docs[0].get('ephoc'),
+          "subj": docUser.docs[0].get('subj'),
+          "coll": docUser.docs[0].get('coll'),
         });
         userMain.setAll(all);
       } catch (e) {
@@ -163,14 +246,6 @@ class UserController extends Model {
     userMain.setAll({});
   }
 
-  String? userUid() {
-    User? user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      return user.uid;
-    }
-    return null;
-  }
-
   Future<void> recpass({
     required String email,
     required VoidCallback onSuccess,
@@ -181,6 +256,31 @@ class UserController extends Model {
       onSuccess();
     } catch (e) {
       onFail();
+    }
+  }
+
+  Future<void> loadClassesList() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      try {
+        QuerySnapshot docUser = await FirebaseFirestore.instance
+            .collection("classes")
+            .where('uid', isEqualTo: user.uid)
+            .where('day', isEqualTo: 'seg')
+            .orderBy('time')
+            .get(const GetOptions());
+        for (QueryDocumentSnapshot<Object?> doc in docUser.docs) {
+          segunda.add(ListTile(
+            title: doc.get('title'),
+            leading: IconButton(
+                onPressed: () {}, icon: Icon(Icons.edit_note_rounded)),
+          ));
+        }
+      } catch (e) {}
+      try {} catch (e) {}
+
+      isLoading = false;
+      notifyListeners();
     }
   }
 }

@@ -1,10 +1,12 @@
 class UserModel {
   Map<String, dynamic> _info = {
-    'name': ' ',
-    'code': ' ',
-    'ano': ' ',
-    'semestre': ' ',
-    'etapa': ' '
+    'name': '...',
+    'code': '...',
+    'year': '...',
+    'seme': '...',
+    'ephoc': '...',
+    'subj': '...',
+    'coll': '...'
   };
 
   Map<String, dynamic> getAll() {
@@ -31,39 +33,43 @@ class UserModel {
     _info['code'] = code;
   }
 
-  String getAno() {
-    return _info['ano'];
+  String getYear() {
+    return _info['year'];
   }
 
-  void setAno(String ano) {
-    _info['ano'] = ano;
+  void setYear(String year) {
+    _info['year'] = year;
   }
 
-  String getSemestre() {
-    return _info['semetre'];
+  String getSeme() {
+    return _info['seme'];
   }
 
-  void setSemestre(String semestre) {
-    _info['semestre'] = semestre;
+  void setSeme(String seme) {
+    _info['seme'] = seme;
   }
 
-  String getEtapa() {
-    return _info['etapa'];
+  String getEphoc() {
+    return _info['ephoc'];
   }
 
-  void setEtapa(String etapa) {
-    _info['etapa'] = etapa;
+  void setEphoc(String ephoc) {
+    _info['ephoc'] = ephoc;
   }
 
-  String getPhotoUrl() {
-    if (_info['photoUrl'] != null) {
-      return _info['photoUrl'];
-    } else {
-      return 'photoUrl';
-    }
+  String getSubj() {
+    return _info['subj'];
   }
 
-  void setPhotoUrl(String? photoUrl) {
-    _info['photoUrl'] = photoUrl;
+  void setSubj(String subj) {
+    _info['subj'] = subj;
+  }
+
+  String getColl() {
+    return _info['coll'];
+  }
+
+  void setColl(String coll) {
+    _info['coll'] = coll;
   }
 }
